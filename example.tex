@@ -9,24 +9,24 @@
     subsectionpage=none,
     titleformattitle=smallcaps,
     titleformatsubtitle=smallcaps,
-    %%% new options for JU theme:
-    maincolor=purple,
-    titlelogo=jth,
-    headlogo=ju,
+    %%% new options for UR2 theme:
+    maincolor=red,
+    titlelogo=urdeux,
+    headlogo=urdeux,
     typeface=source,
-]{metropolis-ju}
+]{metropolis-ur2}
 
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=.,
-    filecolor=juTurquoise,
-    urlcolor=juDarkBlue,
-    pdftitle={JU Beamer Theme},
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={UR2 Beamer Theme},
     pdfpagemode=FullScreen,
 }
 
-\usepackage{mybiblatex}
+\usepackage{biblatex}
 \addbibresource{example.bib}
 
 \usepackage{appendixnumberbeamer}
@@ -37,24 +37,23 @@
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{myminted}
+% \usepackage[cache=false]{minted}
 
-\title[JU Beamer Theme]{A Jönköping University Beamer Theme}
-\subtitle{Based on Metropolis, with many customizations}
-\author{Marcel Bollmann}
-\date{04.10.2021}
+\title[Thème Beamer UR2]{Un thème Beamer Université de Rennes 2}
+\subtitle{Metropolis customisé (dérivé du thème non officiel de Jönköping University)}
+\author{Romain Tavenard}
+\date{2022}
 \institute{%
 \hypersetup{urlcolor=.}
-\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:marcel.bollmann@ju.se}{\texttt{marcel.bollmann@ju.se}}\\%
-\makebox[2.2ex][c]{\faHome}\enspace\url{https://marcel.bollmann.me/}%
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+\makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
 }
 
 \begin{document}
 
 \maketitle
 
-\begin{frame}[stretch=3]
-
-\juHeading{A word of warning}
+\begin{frame}[stretch=3]{A word of warning}
 
   \ifboolexpr{bool {xetex} or bool {luatex}}{
   }{
@@ -71,9 +70,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-\centering
-\juHeading{Contents}
+\begin{frame}{Contents}
 \twocol{\tableofcontents[sections={1-2}]}{\tableofcontents[sections={3-5}]}
 
 \end{frame}
@@ -91,7 +88,7 @@
     \item You can then use this theme by including:\medskip
   
     \begin{minted}{latex}
-    \usetheme[maincolor=purple]{metropolis-ju}
+    \usetheme[maincolor=red]{metropolis-ur2}
     \end{minted}
     
     \medskip
@@ -108,7 +105,7 @@
     \begin{itemize}
     \item The \texttt{maincolor} option sets the background colors of title/standout frames as well as the      headline.\medskip
     
-    It can be either \colorbox{juPurple}{\textcolor{white}{\texttt{purple}}} (default) or \colorbox{juGrey}{\textcolor{white}{\texttt{grey{\vphantom l}}}}.
+    It can be either \colorbox{ur2Rouge}{\textcolor{white}{\texttt{red}}} (default) or \colorbox{ur2Gris}{\textcolor{white}{\texttt{grey{\vphantom l}}}}.
 
     \item This slide shows what the theme looks like with \texttt{maincolor=grey}.
   
@@ -118,7 +115,7 @@
     \end{itemize}
     
     \medskip
-    \textit{Note: For changing the font theme, see the later \hyperlink{selectfonts}{\textcolor{juDarkBlue}{``Fonts'' section.}}}
+    \textit{Note: For changing the font theme, see the later \hyperlink{selectfonts}{\textcolor{ur2Bleu}{``Fonts'' section.}}}
 \end{frame}
 }
 
@@ -127,8 +124,7 @@
     \item The \texttt{titlelogo} option sets the logotype to put on the title frame.  It can be either:
     \begin{itemize}
         \item \texttt{none}: no logo
-        \item \texttt{ju}: JU's main logotype \alert{\bf (this is the default)}
-        \item \texttt{jth}: JTH's logotype
+        \item \texttt{urdeux}: UR2's main logotype \alert{\bf (this is the default)}
     \end{itemize}
     \item The \texttt{headlogo} option does the same thing, but for the smaller logotype in the headline.
     \item Logotypes from the other schools aren't currently included, but could of course also be added.
@@ -138,20 +134,18 @@
 {\metroset{maincolor=grey}
 \begin{frame}[fragile,stretch]{Aside --- Logotypes in Other Places}
 
-The logotypes can be inserted with the following commands:
+The logotypes can be inserted with the following command:
 
 \begin{center}
 \begin{tabular}{lc}
-    \mintinline{latex}{\juLogo} & \begin{minipage}{0.3\textwidth}\centering\juLogo[height=5ex]{}\end{minipage} \\[2ex]
-    \mintinline{latex}{\juLogoSmall} & \begin{minipage}{0.3\textwidth}\centering\juLogoSmall[height=2.5ex]{}\end{minipage} \\
+    \mintinline{latex}{\urLogo} & \begin{minipage}{0.3\textwidth}\centering\urLogo[height=5ex]{}\end{minipage} \\[2ex]
 \end{tabular}
 \end{center}
 
-Scaling options can be given as an argument, e.g.\ \mintinline{latex}{\juLogo[height=2cm]}.
+Scaling options can be given as an argument, e.g.\ \mintinline{latex}{\urLogo[height=2cm]}.
 
 \begin{itemize}
-    \item To get the white versions of the logos, append \texttt{W} to the command; e.g. \mintinline{latex}{\juLogoSmallW}.
-    \item To get the JTH logos, use \mintinline{latex}{\jthLogo...} equivalents.
+    \item To get the white versions of the logos, append \texttt{W} to the command; e.g. \mintinline{latex}{\urLogoW}.
 \end{itemize}
 
 \end{frame}
@@ -177,19 +171,19 @@ Scaling options can be given as an argument, e.g.\ \mintinline{latex}{\juLogo[he
   However, you can also get something closer to JU's official style\ldots
 \end{frame}
 
-\begin{frame}[fragile,stretch=1.5]
-  \juHeading{Typesetting the frame title}
+% \begin{frame}[fragile,stretch=1.5]
+%   \juHeading{Typesetting the frame title}
   
-  A frame \emph{without} a title will look like this.
+%   A frame \emph{without} a title will look like this.
   
-  The heavy, all-uppercase heading can be produced via the command:
+%   The heavy, all-uppercase heading can be produced via the command:
   
-    \mint{latex}|   \juHeading{A title in JU style}|
+%     \mint{latex}|   \juHeading{A title in JU style}|
 
-  The automatic upper-casing might cause some issues with certain symbols or commands inside the heading.  If that's the case, you can use this version without the upper-casing magic:
+%   The automatic upper-casing might cause some issues with certain symbols or commands inside the heading.  If that's the case, you can use this version without the upper-casing magic:
 
-    \mint{latex}|   \juHeadingCased{A HEADING WITH ``QUOTES''}|
-\end{frame}
+%     \mint{latex}|   \juHeadingCased{A HEADING WITH ``QUOTES''}|
+% \end{frame}
 
 \begin{frame}[fragile,stretch=3.5]{Layout: Spacing}
 It's nice to have less text per slide!
@@ -225,45 +219,45 @@ To quickly get a two-column layout, you can use:\medskip
   
   \centering
   \begin{tabular}{ >{\raggedleft\arraybackslash} m{3cm} m{1cm}  >{\raggedleft\arraybackslash} m{3cm} m{1cm} }
-    \tt juPurple & \colorbox{juPurple}{\makebox(14,14){~}} &  \tt juYellow & \colorbox{juYellow}{\makebox(14,14){~}} \\
-    \tt juGrey & \colorbox{juGrey}{\makebox(14,14){~}} & \tt juTurquoise & \colorbox{juTurquoise}{\makebox(14,14){~}} \\
+    \tt ur2Rouge & \colorbox{ur2Rouge}{\makebox(14,14){~}} &  \tt ur2Jaune & \colorbox{ur2Jaune}{\makebox(14,14){~}} \\
+    \tt ur2Gris & \colorbox{ur2Gris}{\makebox(14,14){~}} & \tt ur2Turquoise & \colorbox{ur2Turquoise}{\makebox(14,14){~}} \\
     &&
-    \tt juDarkBlue & \colorbox{juDarkBlue}{\makebox(14,14){~}} \\
+    \tt ur2Bleu & \colorbox{ur2Bleu}{\makebox(14,14){~}} \\
     &&
-    \tt juBeige & \colorbox{juBeige}{\makebox(14,14){~}} \\
+    \tt ur2GrisClair & \colorbox{ur2GrisClair}{\makebox(14,14){~}} \\
   \end{tabular}
 \end{frame}
 
 \subsection{Tints}
 
-\begin{frame}{Colors}
-  Different color tints are also defined.
-  \bigskip
+% \begin{frame}{Colors}
+%   Different color tints are also defined.
+%   \bigskip
   
-  \centering
- \begin{tabular}{ >{\raggedleft\arraybackslash} m{3.5cm} m{1cm}  >{\raggedleft\arraybackslash} m{3.5cm} m{1cm} }
-    \tt juPurpleDarker & \colorbox{juPurpleDarker}{\makebox(14,14){~}} & & \\
-    \tt juPurpleFade1 & \colorbox{juPurpleFade1}{\makebox(14,14){~}} & \tt juGreyFade1 & \colorbox{juGreyFade1}{\makebox(14,14){~}} \\
-    \tt juPurpleFade2 & \colorbox{juPurpleFade2}{\makebox(14,14){~}} & \tt juGreyFade2 & \colorbox{juGreyFade2}{\makebox(14,14){~}} \\
-    \tt juPurpleFade3 & \colorbox{juPurpleFade3}{\makebox(14,14){~}} & \tt juGreyFade3 & \colorbox{juGreyFade3}{\makebox(14,14){~}} \\
-  \end{tabular}
-\end{frame}
+%   \centering
+%  \begin{tabular}{ >{\raggedleft\arraybackslash} m{3.5cm} m{1cm}  >{\raggedleft\arraybackslash} m{3.5cm} m{1cm} }
+%     \tt juPurpleDarker & \colorbox{juPurpleDarker}{\makebox(14,14){~}} & & \\
+%     \tt juPurpleFade1 & \colorbox{juPurpleFade1}{\makebox(14,14){~}} & \tt juGreyFade1 & \colorbox{juGreyFade1}{\makebox(14,14){~}} \\
+%     \tt juPurpleFade2 & \colorbox{juPurpleFade2}{\makebox(14,14){~}} & \tt juGreyFade2 & \colorbox{juGreyFade2}{\makebox(14,14){~}} \\
+%     \tt juPurpleFade3 & \colorbox{juPurpleFade3}{\makebox(14,14){~}} & \tt juGreyFade3 & \colorbox{juGreyFade3}{\makebox(14,14){~}} \\
+%   \end{tabular}
+% \end{frame}
 
-\begin{frame}{Colors}
-  Color tints for the secondary colors.
-  \bigskip
+% \begin{frame}{Colors}
+%   Color tints for the secondary colors.
+%   \bigskip
   
-  \centering
-  \begin{tabular}{ >{\raggedleft\arraybackslash} m{3.5cm} m{1cm}  >{\raggedleft\arraybackslash} m{3.5cm} m{1cm} }
-    \tt juYellowFade1 & \colorbox{juYellowFade1}{\makebox(14,14){~}} & \tt juTurquoiseFade1 & \colorbox{juTurquoiseFade1}{\makebox(14,14){~}} \\
-    \tt juYellowFade2 & \colorbox{juYellowFade2}{\makebox(14,14){~}} & \tt juTurquoiseFade2 & \colorbox{juTurquoiseFade2}{\makebox(14,14){~}} \\
-    \tt juYellowFade3 & \colorbox{juYellowFade3}{\makebox(14,14){~}} & \tt juTurquoiseFade3 & \colorbox{juTurquoiseFade3}{\makebox(14,14){~}} \\[2em]
-    \tt juDarkBlueFade1 & \colorbox{juDarkBlueFade1}{\makebox(14,14){~}} & & \\
-    \tt juDarkBlueFade2 & \colorbox{juDarkBlueFade2}{\makebox(14,14){~}} & & \\
-    \tt juDarkBlueFade3 & \colorbox{juDarkBlueFade3}{\makebox(14,14){~}} & & \\
+%   \centering
+%   \begin{tabular}{ >{\raggedleft\arraybackslash} m{3.5cm} m{1cm}  >{\raggedleft\arraybackslash} m{3.5cm} m{1cm} }
+%     \tt juYellowFade1 & \colorbox{juYellowFade1}{\makebox(14,14){~}} & \tt juTurquoiseFade1 & \colorbox{juTurquoiseFade1}{\makebox(14,14){~}} \\
+%     \tt juYellowFade2 & \colorbox{juYellowFade2}{\makebox(14,14){~}} & \tt juTurquoiseFade2 & \colorbox{juTurquoiseFade2}{\makebox(14,14){~}} \\
+%     \tt juYellowFade3 & \colorbox{juYellowFade3}{\makebox(14,14){~}} & \tt juTurquoiseFade3 & \colorbox{juTurquoiseFade3}{\makebox(14,14){~}} \\[2em]
+%     \tt juDarkBlueFade1 & \colorbox{juDarkBlueFade1}{\makebox(14,14){~}} & & \\
+%     \tt juDarkBlueFade2 & \colorbox{juDarkBlueFade2}{\makebox(14,14){~}} & & \\
+%     \tt juDarkBlueFade3 & \colorbox{juDarkBlueFade3}{\makebox(14,14){~}} & & \\
     
-  \end{tabular}
-\end{frame}
+%   \end{tabular}
+% \end{frame}
 
 \subsection{Usage}
 
@@ -273,7 +267,7 @@ Colors can be used with any commands, for example:
 \begin{center}
     \begin{tabular}{ll}
     \toprule
-        \mintinline{latex}{\textcolor{juYellow}{Lorem ipsum}} & \textcolor{juYellow}{Lorem ipsum} \\
+        \mintinline{latex}{\textcolor{ur2Jaune}{Lorem ipsum}} & \textcolor{ur2Jaune}{Lorem ipsum} \\
     \bottomrule
     \end{tabular}
 \end{center}
@@ -293,7 +287,7 @@ Some predefined commands that use these colors:
 \end{center}
 
 \medskip
-The colors are also used in different predefined \hyperlink{environments}{\textcolor{juDarkBlue}{environments}} and \hyperlink{blocks}{\textcolor{juDarkBlue}{blocks}}.
+The colors are also used in different predefined \hyperlink{environments}{\textcolor{ur2Bleu}{environments}} and \hyperlink{blocks}{\textcolor{ur2Bleu}{blocks}}.
 
 \end{frame}
 
@@ -630,8 +624,7 @@ The quotation above can be produced via:
 \metroset{sectionpage=none}
 \section{Bibliography}
 
-\begin{frame}
-    \juHeading{Bibliography}
+\begin{frame}{Bibliography}
 
     \nocite{*}
     \printbibliography[heading=none]
@@ -640,7 +633,7 @@ The quotation above can be produced via:
 \end{frame}
 
 \begin{frame}[plain,standout,noframenumbering]
-\juLogoW[height=2.5cm]
+\urLogoW[height=2.5cm]
 \end{frame}
 
 \end{document}

@@ -13,8 +13,9 @@
 %% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamercolorthemeju}[2021/10/04 JU Color Theme]
+\ProvidesPackage{beamercolorthemeur2}[2022 UR2 Color Theme]
 \RequirePackage{pgfopts}
 \RequirePackage{tikz}
 \usetikzlibrary{positioning,calc}
@@ -33,44 +34,31 @@
 \pgfkeys{
   /metropolis/color/maincolor/.cd,
     .is choice,
-    purple/.code=\metropolis@colors@purple,
-    grey/.code=\metropolis@colors@grey,
+    red/.code=\metropolis@colors@red,  % TODO
+    grey/.code=\metropolis@colors@grey,  % TODO
 }
 \newcommand{\metropolis@color@setdefaults}{
   \pgfkeys{/metropolis/color/.cd,
-    maincolor=purple,
+    maincolor=red,  % TODO
     block=transparent,
     itemize=mono,
   }
 }
 
+
+
+
+
+
 % main colors
-\definecolor{juPurple}{RGB}{150,27,129}
-\definecolor{juGrey}{RGB}{121,121,121}
+\definecolor{ur2Rouge}{RGB}{203,0,25}
+\definecolor{ur2Gris}{RGB}{116,112,111}
 
 % complementary colors
-\definecolor{juBeige}{RGB}{235,235,223}
-\definecolor{juYellow}{RGB}{255,181,0}
-\definecolor{juTurquoise}{RGB}{0,172,169}
-\definecolor{juDarkBlue}{RGB}{0,56,101}
-
-% shades
-\definecolor{juPurpleFade1}{RGB}{168,77,151}
-\definecolor{juPurpleFade2}{RGB}{198,146,194}
-\definecolor{juPurpleFade3}{RGB}{231,213,234}
-\definecolor{juPurpleDarker}{RGB}{128,22,111}
-\definecolor{juGreyFade1}{RGB}{147,147,147}
-\definecolor{juGreyFade2}{RGB}{187,187,187}
-\definecolor{juGreyFade3}{RGB}{228,228,228}
-\definecolor{juYellowFade1}{RGB}{253,199,67}
-\definecolor{juYellowFade2}{RGB}{255,218,127}
-\definecolor{juYellowFade3}{RGB}{255,240,204}
-\definecolor{juTurquoiseFade1}{RGB}{85,189,186}
-\definecolor{juTurquoiseFade2}{RGB}{180,214,212}
-\definecolor{juTurquoiseFade3}{RGB}{227,239,239}
-\definecolor{juDarkBlueFade1}{RGB}{51,96,132}
-\definecolor{juDarkBlueFade2}{RGB}{127,155,178}
-\definecolor{juDarkBlueFade3}{RGB}{204,215,224}
+\definecolor{ur2Jaune}{RGB}{252,243,10}
+\definecolor{ur2Turquoise}{RGB}{40,162,194}
+\definecolor{ur2Bleu}{RGB}{21,70,153}
+\definecolor{ur2GrisClair}{RGB}{144,144,147}
 
 \setbeamercolor{normal text}{%
   fg=black!94,
@@ -78,67 +66,67 @@
 }
 \usebeamercolor[fg]{normal text}
 \setbeamercolor{alerted text}{%
-  fg=juPurple
+  fg=ur2Rouge
 }
 \setbeamercolor{example text}{%
-  fg=juTurquoise
+  fg=ur2Turquoise
 }
 \setbeamercolor{warning text}{%
-  fg=juYellow
+  fg=ur2Jaune
 }
 \setbeamercolor{quotation mark}{%
-  fg=juGreyFade2
+  fg=ur2GrisClair
 }
 
 \newcommand{\metropolis@colors@grey}{
   \setbeamercolor{palette primary}{%
     use=normal text,
     fg=black!2,
-    bg=juGrey
+    bg=ur2Gris
   }
   \setbeamercolor{palette variant faded1}{%
     use=normal text,
     fg=black!2,
-    bg=juGreyFade1
+    bg=ur2GrisClair
   }
   \setbeamercolor{palette variant faded2}{%
     use=normal text,
     fg=black!2,
-    bg=juGreyFade2
+    bg=ur2GrisClair
   }
   \setbeamercolor{progress bar}{%
     use=alerted text,
-    fg=juPurpleFade1,
-    bg=juGrey
+    fg=ur2Rouge,
+    bg=ur2GrisClair
   }
   \setbeamercolor{footline standout}{
-    fg=juGreyFade3,
+    fg=ur2GrisClair,
     bg=
   }
 }
-\newcommand{\metropolis@colors@purple}{
+\newcommand{\metropolis@colors@red}{
   \setbeamercolor{palette primary}{%
     use=normal text,
-    fg=black!2,
-    bg=juPurple
+    fg=white!2,
+    bg=ur2Rouge
   }
   \setbeamercolor{palette variant faded1}{%
     use=normal text,
-    fg=black!2,
-    bg=juPurpleFade1
+    fg=white!2,
+    bg=ur2Rouge!50
   }
   \setbeamercolor{palette variant faded2}{%
     use=normal text,
-    fg=black!2,
-    bg=juPurpleFade2
+    fg=white!2,
+    bg=ur2Rouge!20
   }
   \setbeamercolor{progress bar}{%
     use=alerted text,
-    fg=juPurpleFade2,
-    bg=juGreyFade2
+    fg=ur2Rouge,
+    bg=ur2GrisClair
   }
   \setbeamercolor{footline standout}{
-    fg=juGreyFade3,
+    fg=ur2GrisClair,
     bg=
   }
 }
@@ -189,7 +177,7 @@
   \setbeamercolor{block title warning}{%
     use={block title},
     bg=block title.bg,
-    fg=juYellow
+    fg=ur2Jaune
   }
   \setbeamercolor{block body alerted}{use=block body, parent=block body, bg=block body.bg}
   \setbeamercolor{block body example}{use=block body, parent=block body, bg=block body.bg}
@@ -202,50 +190,50 @@
   \setbeamercolor{block title}{%
     use=normal text,
     fg=normal text.bg,
-    bg=juGrey
+    bg=ur2Gris
   }
   \setbeamercolor{block body}{
     use={block title, normal text},
-    bg=juGreyFade3
+    bg=ur2GrisClair
   }
   \setbeamercolor{block title alerted}{%
     use=normal text,
-    bg=juPurple,
+    bg=ur2Rouge,
     fg=normal text.bg
   }
   \setbeamercolor{block body alerted}{
     use=normal text,
-    bg=juPurpleFade3,
+    bg=ur2Rouge!50,
     fg=normal text.fg
   }
   \setbeamercolor{block title example}{%
     use=normal text,
-    bg=juTurquoise,
+    bg=ur2Turquoise,
     fg=normal text.bg
   }
   \setbeamercolor{block body example}{
     use=normal text,
-    bg=juTurquoiseFade3,
+    bg=ur2Turquoise!50,
     fg=normal text.fg
   }
   \setbeamercolor{block title warning}{%
     use=normal text,
-    bg=juYellow,
+    bg=ur2Jaune,
     fg=normal text.bg
   }
   \setbeamercolor{block body warning}{
     use=normal text,
-    bg=juYellowFade3,
+    bg=ur2Jaune!50,
     fg=normal text.fg
   }
   \setbeamertemplate{blocks}[default]
   \setbeamertemplate{block warning begin}[default]
   \setbeamertemplate{block warning end}[default]
 }
-\setbeamercolor{footnote}{fg=juGrey}
+\setbeamercolor{footnote}{fg=ur2Gris}
 \setbeamercolor{footnote mark}{fg=.}
 \setbeamercolor{footline}{
-    fg=juGrey,
+    fg=ur2Gris,
     bg=
 }
 \setbeamercolor{headlogo line white}{
@@ -267,30 +255,30 @@
 %%%%%%%%%%%
 
 \setbeamercolor{bibliography entry author}{use=normal text, fg=normal text.fg}
-\setbeamercolor{bibliography entry title}{fg=juTurquoise}
-\setbeamercolor{bibliography entry location}{fg=juGrey}
+\setbeamercolor{bibliography entry title}{fg=ur2Turquoise}
+\setbeamercolor{bibliography entry location}{fg=ur2Gris}
 
 %% MB: nicer enumerate environments
 \setbeamercolor{item}{use=normal text, parent=normal text, fg=normal text.fg}
 \newcommand{\metropolis@itemize@colored}{
     \setbeamercolor{itemize item}{use=palette primary, parent=palette primary, fg=palette primary.bg}
-    \setbeamercolor{itemize subitem}{use=palette primary, parent=palette primary, fg=juTurquoise}
-    \setbeamercolor{itemize subsubitem}{use=palette primary, parent=palette primary, fg=juGrey}
+    \setbeamercolor{itemize subitem}{use=palette primary, parent=palette primary, fg=ur2Turquoise}
+    \setbeamercolor{itemize subsubitem}{use=palette primary, parent=palette primary, fg=ur2Gris}
     \setbeamercolor{item projected}{use=palette primary, parent=palette primary, fg=palette primary.fg, bg=palette primary.bg}
-    \setbeamercolor{subitem projected}{fg=black!2, bg=juTurquoise}
-    \setbeamercolor{subsubitem projected}{fg=black!2, bg=juGrey}
+    \setbeamercolor{subitem projected}{fg=black!2, bg=ur2Turquoise}
+    \setbeamercolor{subsubitem projected}{fg=black!2, bg=ur2Gris}
 }
 \newcommand{\metropolis@itemize@mono}{
     \setbeamercolor{itemize item}{use=normal text, parent=normal text, fg=normal text.fg}
     \setbeamercolor{itemize subitem}{use=normal text, parent=normal text, fg=normal text.fg}
     \setbeamercolor{itemize subsubitem}{use=normal text, parent=normal text, fg=normal text.fg}
-    \setbeamercolor{item projected}{use=normal text, parent=normal text, fg=normal text.bg, bg=juGrey}
-    \setbeamercolor{subitem projected}{use=normal text, parent=normal text, fg=normal text.bg, bg=juGrey}
-    \setbeamercolor{subsubitem projected}{use=normal text, parent=normal text, fg=normal text.bg, bg=juGrey}
+    \setbeamercolor{item projected}{use=normal text, parent=normal text, fg=normal text.bg, bg=ur2Gris}
+    \setbeamercolor{subitem projected}{use=normal text, parent=normal text, fg=normal text.bg, bg=ur2Gris}
+    \setbeamercolor{subsubitem projected}{use=normal text, parent=normal text, fg=normal text.bg, bg=ur2Gris}
 }
 
-\newcommand{\highlight}[1]{\textcolor{juTurquoise}{\usebeamerfont{alerted text}#1}}
-\newcommand{\alertExample}[1]{\textcolor{juDarkBlueFade1}{\usebeamerfont{alerted text}#1}}
+\newcommand{\highlight}[1]{\textcolor{ur2Turquoise}{\usebeamerfont{alerted text}#1}}
+\newcommand{\alertExample}[1]{\textcolor{ur2Bleu}{\usebeamerfont{alerted text}#1}}
 
 \metropolis@color@setdefaults
 \ProcessPgfPackageOptions{/metropolis/color}
@@ -298,4 +286,4 @@
 \mode<all>
 \endinput
 %%
-%% End of file `beamercolorthememetropolis.sty'.
+%% End of file `beamercolorthemeur2.sty'.

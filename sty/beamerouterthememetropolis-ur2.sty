@@ -13,7 +13,7 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerouterthememetropolis-ju}[2021/10/04 Metropolis outer theme, adapted for JU style]
+\ProvidesPackage{beamerouterthememetropolis-ur2}[2021/10/04 Metropolis outer theme, adapted for UR2 style]
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
 \RequirePackage{pgfopts}
@@ -59,22 +59,20 @@
   /metropolis/outer/titlelogo/.cd,
     .is choice,
     none/.code=\metropolis@titlelogo@none,
-    ju/.code=\metropolis@titlelogo@ju,
-    jth/.code=\metropolis@titlelogo@jth,
+    urdeux/.code=\metropolis@titlelogo@urdeux,
 }\pgfkeys{
   /metropolis/outer/headlogo/.cd,
     .is choice,
     none/.code=\metropolis@headlogo@none,
-    ju/.code=\metropolis@headlogo@ju,
-    jth/.code=\metropolis@headlogo@jth,
+    urdeux/.code=\metropolis@headlogo@urdeux,
 }
 \newcommand{\metropolis@outer@setdefaults}{
   \pgfkeys{/metropolis/outer/.cd,
     numbering=counter,
     progressbar=none,
     footer=none,
-    headlogo=ju,
-    titlelogo=ju,
+    headlogo=urdeux,
+    titlelogo=urdeux,
   }
 }
 \setbeamertemplate{navigation symbols}{}
@@ -185,24 +183,16 @@
     }{}{}
 }
 
-%%%%% JU Logo
+%%%%% UR2 Logo
 \setbeamertemplate{title graphic}{\vbox to 0pt {\vspace*{20em}\inserttitlegraphic}\nointerlineskip}
 \setbeamertemplate{paperref}{\vbox to 0pt {\vspace*{20em}\inserttitlegraphic}\nointerlineskip}
 
 % This makes the logo appear on the title slide
-\newcommand{\metropolis@titlelogo@jth}{
+\newcommand{\metropolis@titlelogo@urdeux}{
   \titlegraphic{%
   \begin{tikzpicture}[overlay,remember picture]
   \node[xshift=-2.4cm,yshift=1.6cm] at (current page.south east){
-    \includegraphics[height=1.4cm]{sty/img/JTH_A_neg_300ppi.png}
-  };
-  \end{tikzpicture}}%
-}
-\newcommand{\metropolis@titlelogo@ju}{
-  \titlegraphic{%
-  \begin{tikzpicture}[overlay,remember picture]
-  \node[xshift=-2.4cm,yshift=1.6cm] at (current page.south east){
-    \includegraphics[height=1.4cm]{sty/img/JU_A_neg_300ppi.png}
+    \includegraphics[height=1.4cm]{img/logoR2-Blanc.png}
   };
   \end{tikzpicture}}%
 }
@@ -212,21 +202,16 @@
 
 % This defines commands to insert the B logo
 \providebool{metropolis@drawlogo}
-\newcommand{\insertJUheadlogowhite}{}
-\newcommand{\insertJUheadlogoblack}{}
-\newcommand{\metropolis@headlogo@jth}{
-    \renewcommand{\insertJUheadlogowhite}{\includegraphics[keepaspectratio,height=0.4cm]{img/JTH_B_neg_300ppi.png}}
-    \renewcommand{\insertJUheadlogoblack}{\includegraphics[keepaspectratio,height=0.4cm]{img/JTH_B_sv_300ppi.png}}
-    \booltrue{metropolis@drawlogo}
-}
-\newcommand{\metropolis@headlogo@ju}{
-    \renewcommand{\insertJUheadlogowhite}{\includegraphics[keepaspectratio,height=0.4cm]{img/JU_B_neg.png}}
-    \renewcommand{\insertJUheadlogoblack}{\includegraphics[keepaspectratio,height=0.4cm]{img/JU_B_sv.png}}
+\newcommand{\insertURheadlogowhite}{}
+\newcommand{\insertURheadlogoblack}{}
+\newcommand{\metropolis@headlogo@urdeux}{
+    \renewcommand{\insertURheadlogowhite}{\includegraphics[keepaspectratio,height=1.0cm]{img/logoR2-Blanc.png}}
+    \renewcommand{\insertURheadlogoblack}{\includegraphics[keepaspectratio,height=1.0cm]{img/logoR2-Noir.png}}
     \booltrue{metropolis@drawlogo}
 }
 \newcommand{\metropolis@headlogo@none}{
-    \renewcommand{\insertJUheadlogowhite}{}
-    \renewcommand{\insertJUheadlogoblack}{}
+    \renewcommand{\insertURheadlogowhite}{}
+    \renewcommand{\insertURheadlogoblack}{}
     \boolfalse{metropolis@drawlogo}
 }
 
@@ -249,9 +234,9 @@
   \begin{tikzpicture}[remember picture,overlay]
         \node[name=logo,anchor=east,xshift={\paperwidth-9.8pt},yshift={\paperheight-13.8pt}] at (0,0) {
             \ifbool{metropolis@whitelogo}{%
-                \insertJUheadlogowhite
+                \insertURheadlogowhite
             }{%
-                \insertJUheadlogoblack
+                \insertURheadlogoblack
             }
         };
         \ifx\insertframetitle\@empty%
@@ -260,28 +245,16 @@
   \end{tikzpicture}
   }{}
 }
-%%%%% end of JU logo
+%%%%% end of UR2 logo
 
 \newlength{\myLogoDefaultHeight}
-\newcommand{\juLogo}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JU_A_sv_300ppi.png}}
-\newcommand{\juLogoW}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JU_A_neg_300ppi.png}}
-\newcommand{\juLogoSmall}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JU_B_sv.png}}
-\newcommand{\juLogoSmallW}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JU_B_neg.png}}
-\newcommand{\jthLogo}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JTH_A_sv_300ppi.png}}
-\newcommand{\jthLogoW}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JTH_A_neg_300ppi.png}}
-\newcommand{\jthLogoSmall}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JTH_B_sv_300ppi.png}}
-\newcommand{\jthLogoSmallW}[1][height=\myLogoDefaultHeight]{%
-    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/JTH_B_neg_300ppi.png}}
+\newcommand{\urLogo}[1][height=\myLogoDefaultHeight]{%
+    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/logoR2-Noir.png}}
+\newcommand{\urLogoW}[1][height=\myLogoDefaultHeight]{%
+    \settoheight{\myLogoDefaultHeight}{Ä}\includegraphics[keepaspectratio,#1]{img/logoR2-Blanc.png}}
 
 \metropolis@outer@setdefaults
 \ProcessPgfPackageOptions{/metropolis/outer}
 \endinput
 %%
-%% End of file `beamerouterthememetropolis-ju.sty'.
+%% End of file `beamerouterthememetropolis-ur2.sty'.

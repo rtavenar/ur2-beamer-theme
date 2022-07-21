@@ -1,6 +1,6 @@
 %%
 %% ---------------------------------------------------------------------------
-%% Modified 2021 by Marcel Bollmann.
+%% Modified 2022 by Romain Tavenard.
 %% ---------------------------------------------------------------------------
 %% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
 %% contributors can be found at
@@ -13,7 +13,7 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerinnerthememetropolis-ju}[2021/10/04 Metropolis inner theme, adapted for JU style]
+\ProvidesPackage{beamerinnerthememetropolis-ur2}[2021/10/04 Metropolis inner theme, adapted for UR2 style]
 \RequirePackage{etoolbox}
 \RequirePackage{keyval}
 \RequirePackage{calc}
@@ -469,8 +469,8 @@
     }{}
   }{}{}
   
-\newcommand<>{\juHeading}[1]{{\LARGE\extraboldsans\usebeamercolor[bg]{palette primary}\expandafter\MakeUppercase\expandafter{#1}}\vspace{\parskip}}
-\newcommand<>{\juHeadingCased}[1]{{\LARGE\extraboldsans\usebeamercolor[bg]{palette primary}{#1}}\vspace{\parskip}}
+% \newcommand<>{\juHeading}[1]{{\LARGE\extraboldsans\usebeamercolor[bg]{palette primary}\expandafter\MakeUppercase\expandafter{#1}}\vspace{\parskip}}
+% \newcommand<>{\juHeadingCased}[1]{{\LARGE\extraboldsans\usebeamercolor[bg]{palette primary}{#1}}\vspace{\parskip}}
 
 %% MB: Quotes and attributions
 \newcommand*\quotesize{50}
@@ -505,4 +505,4 @@
 \ProcessPgfPackageOptions{/metropolis/inner}
 \endinput
 %%
-%% End of file `beamerinnerthememetropolis-ju.sty'.
+%% End of file `beamerinnerthememetropolis-ur2.sty'.

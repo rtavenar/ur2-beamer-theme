@@ -1,6 +1,6 @@
-# Jönköping University Beamer Theme
+# Université de Rennes 2 Beamer Theme
 
-A [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) theme with elements from [Jönköping University](https://ju.se/) branding.
+A [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) theme with elements from Université de Rennes 2 branding, derive from [Jonkping University non-official theme](https://github.com/JonkopingAI/ju-beamer-theme).
 
 ## About this theme
 
