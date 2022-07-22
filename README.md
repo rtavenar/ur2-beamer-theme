@@ -11,11 +11,11 @@ Ceci est un thème [LaTeX Beamer](https://www.overleaf.com/learn/latex/Beamer) u
 4. **Compilez avec LuaLaTeX** (or XeLaTeX) pour que les polices de caractères soient correctes ! Je recommande l'utilisation  
    de `latexmk` avec le fichier de configuration `latexmkrc` fourni copié dans votre répertoire de travail.
 
-### Options \& Features
+### Options du thème
 
 La [**présentation fournie en exemple**](./example.pdf) dans ce dépôt introduit les différentes options du thème.
 
-## Examples
+## Exemples
 
 <img alt="Title slide from example.pdf" title="Title slide" src="https://github.com/rtavenar/ur2-beamer-theme/raw/main/slide_title.png" width="360" height="270"> <img alt="Section title slide from example.pdf" title="Example slide" src="https://github.com/rtavenar/ur2-beamer-theme/raw/main/slide_sectiontitle.png" width="360" height="270">
 
