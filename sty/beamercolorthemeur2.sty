@@ -34,12 +34,13 @@
 \pgfkeys{
   /metropolis/color/maincolor/.cd,
     .is choice,
-    red/.code=\metropolis@colors@red,  % TODO
-    grey/.code=\metropolis@colors@grey,  % TODO
+    red/.code=\metropolis@colors@red,
+    grey/.code=\metropolis@colors@grey,
+    white/.code=\metropolis@colors@white,
 }
 \newcommand{\metropolis@color@setdefaults}{
   \pgfkeys{/metropolis/color/.cd,
-    maincolor=red,  % TODO
+    maincolor=red,
     block=transparent,
     itemize=mono,
   }
@@ -97,6 +98,32 @@
   \setbeamercolor{progress bar}{%
     use=alerted text,
     fg=ur2Rouge,
+    bg=ur2GrisClair
+  }
+  \setbeamercolor{footline standout}{
+    fg=ur2GrisClair,
+    bg=
+  }
+}
+\newcommand{\metropolis@colors@white}{  % TODO: would require to have black logo here
+  \setbeamercolor{palette primary}{%
+    use=normal text,
+    fg=black,
+    bg=white
+  }
+  \setbeamercolor{palette variant faded1}{%
+    use=normal text,
+    fg=black!2,
+    bg=ur2GrisClair
+  }
+  \setbeamercolor{palette variant faded2}{%
+    use=normal text,
+    fg=black!2,
+    bg=ur2GrisClair
+  }
+  \setbeamercolor{progress bar}{%
+    use=alerted text,
+    fg=ur2Gris,
     bg=ur2GrisClair
   }
   \setbeamercolor{footline standout}{

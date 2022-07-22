@@ -82,226 +82,180 @@
 \newcommand{\metropolis@font@default}{%
 }
 
-\newcommand{\metropolis@font@typeface@fira}{%
-  \ifboolexpr{bool {xetex} or bool {luatex}}{
-    \iffontsavailable{Fira Sans Light,%
-                      Fira Sans Light Italic,%
-                      Fira Sans,%
-                      Fira Sans Italic}%
-    {%
-      \setsansfont[ItalicFont={Fira Sans Light Italic},%
-                   BoldFont={Fira Sans},%
-                   BoldItalicFont={Fira Sans Italic}]%
-                  {Fira Sans Light}%
-    }{%
-      \iffontsavailable{Fira Sans Light OT,%
-                        Fira Sans Light Italic OT,%
-                        Fira Sans OT,%
-                        Fira Sans Italic OT}%
-      {%
-        \setsansfont[ItalicFont={Fira Sans Light Italic OT},%
-                     BoldFont={Fira Sans OT},%
-                     BoldItalicFont={Fira Sans Italic OT}]%
-                    {Fira Sans Light OT}%
-      }{%
-        \PackageWarning{beamerthememetropolis}{%
-          Could not find Fira Sans fonts%
-        }
-      }
-    }
-    \iffontsavailable{Fira Sans Bold}{%
-      \setfontfamily\extraboldsans{Fira Sans Bold}%
-    }{%
-      \iffontsavailable{Fira Sans Bold OT}{%
-        \setfontfamily\extraboldsans{Fira Sans Bold OT}%
-      }{%
-        \PackageWarning{beamerthememetropolis}{%
-          Could not find Fira Sans Bold font%
-        }
-      }
-    }
-    \iffontsavailable{Fira Code, Fira Code Medium}{%
-      \setmonofont[BoldFont={Fira Code Medium},Scale=0.9]{Fira Code}%
-    }{%
-      \iffontsavailable{Fira Mono, Fira Mono Medium}{%
-        \setmonofont[BoldFont={Fira Mono Medium},Scale=0.9]{Fira Mono}%
-      }{%
-        \iffontsavailable{Fira Mono OT, Fira Mono Medium OT}{%
-          \setmonofont[BoldFont={Fira Mono Medium OT},Scale=0.9]{Fira Mono OT}%
-        }{%
-          \PackageWarning{beamerthememetropolis}{%
-            Could not find Fira Code or Fira Mono fonts%
-          }
-        }
-      }
-    }
-    \iffontsavailable{Charter BT}{%
-      \setmainfont{Charter BT}%
-    }{%
-      \iffontsavailable{Charter}{%
-        \setmainfont{Charter}%
-      }{
-        \iffontsavailable{XCharter}{%
-          \setmainfont{XCharter}%
-        }{}%
-      }%
-    }
-    \renewcommand{\addfontfeaturefortabular}{\addfontfeature{Numbers={Monospaced}}}
+\ifboolexpr{bool {xetex} or bool {luatex}}{
+  \iffontsavailable{Source Sans Pro Light,%
+                    Source Sans Pro Light Italic,%
+                    Source Sans Pro,%
+                    Source Sans Pro Italic,%
+                    Source Sans Pro Bold}%
+  {%
+    \setsansfont[ItalicFont={Source Sans Pro Light Italic},%
+                  BoldFont={Source Sans Pro},%
+                  BoldItalicFont={Source Sans Pro Italic},%
+                  Scale=1.05]%
+                {Source Sans Pro Light}%
+    \setfontfamily\extraboldsans{Source Sans Pro Bold}%
   }{%
     \PackageWarning{beamerthememetropolis}{%
-      You need to compile with XeLaTeX or LuaLaTeX to select the Fira fonts%
-    }%
+      Could not find Source Sans Pro fonts%
+    }
   }
-}
-
-\newcommand{\metropolis@font@typeface@franklin}{%
-  \ifboolexpr{bool {xetex} or bool {luatex}}{
-    \iffontsavailable{Libre Franklin Light,%
-                      Libre Franklin Light Italic,%
-                      Libre Franklin Semibold,%
-                      Libre Franklin Semibold Italic,%
-                      Libre Franklin Bold}%
-    {%
-      \setsansfont[ItalicFont={Libre Franklin Light Italic},%
-                   BoldFont={Libre Franklin Semibold},%
-                   BoldItalicFont={Libre Franklin Semibold Italic},%
-                   Scale=0.95]%
-                  {Libre Franklin Light}%
-      \setfontfamily\extraboldsans{Libre Franklin Bold}%
-    }{%
-      \PackageWarning{beamerthememetropolis}{%
-        Could not find Libre Franklin fonts%
-      }
-    }
-    \iffontsavailable{Hack}{%
-      \setmonofont[Scale=0.85]{Hack}%
-    }{%
-      \PackageWarning{beamerthememetropolis}{%
-        Could not find Hack fonts%
-      }
-    }
-    \iffontsavailable{Libre Baskerville}{%
-      \setmainfont[Scale=0.85]{Libre Baskerville}%
-    }{}
-    \renewcommand{\addfontfeaturefortabular}{}
+  \iffontsavailable{Source Code Pro,%
+                    Source Code Pro Semibold,%
+                    Source Code Pro Italic,%
+                    Source Code Pro Semibold Italic}{%
+    \setmonofont[BoldFont={Source Code Pro Semibold},%
+                  ItalicFont={Source Code Pro Italic},%
+                  BoldItalicFont={Source Code Pro Semibold Italic},%
+                  Scale=0.85]{Source Code Pro}%
   }{%
     \PackageWarning{beamerthememetropolis}{%
-      You need to compile with XeLaTeX or LuaLaTeX to select the Franklin fonts%
-    }%
+      Could not find Source Code Pro fonts%
+    }
   }
+  \iffontsavailable{Source Serif Pro,%
+                    Source Serif Pro Light,%
+                    Source Serif Pro Italic,%
+                    Source Serif Pro Light Italic}{%
+    \setmainfont[BoldFont={Source Serif Pro},%
+                  ItalicFont={Source Serif Pro Light Italic},%
+                  BoldItalicFont={Source Serif Pro Italic},%
+                  Scale=0.95]{Source Serif Pro Light}%
+  }{}
+  \renewcommand{\addfontfeaturefortabular}{}
+}{%
+  \PackageWarning{beamerthememetropolis}{%
+    You need to compile with XeLaTeX or LuaLaTeX to select the Source Pro fonts%
+  }%
 }
 
-\newcommand{\metropolis@font@typeface@source}{%
-  \ifboolexpr{bool {xetex} or bool {luatex}}{
-    \iffontsavailable{Source Sans Pro Light,%
-                      Source Sans Pro Light Italic,%
-                      Source Sans Pro,%
-                      Source Sans Pro Italic,%
-                      Source Sans Pro Bold}%
-    {%
-      \setsansfont[ItalicFont={Source Sans Pro Light Italic},%
-                   BoldFont={Source Sans Pro},%
-                   BoldItalicFont={Source Sans Pro Italic},%
-                   Scale=1.05]%
-                  {Source Sans Pro Light}%
-      \setfontfamily\extraboldsans{Source Sans Pro Bold}%
-    }{%
-      \PackageWarning{beamerthememetropolis}{%
-        Could not find Source Sans Pro fonts%
-      }
-    }
-    \iffontsavailable{Source Code Pro,%
-                      Source Code Pro Semibold,%
-                      Source Code Pro Italic,%
-                      Source Code Pro Semibold Italic}{%
-      \setmonofont[BoldFont={Source Code Pro Semibold},%
-                   ItalicFont={Source Code Pro Italic},%
-                   BoldItalicFont={Source Code Pro Semibold Italic},%
-                   Scale=0.85]{Source Code Pro}%
-    }{%
-      \PackageWarning{beamerthememetropolis}{%
-        Could not find Source Code Pro fonts%
-      }
-    }
-    \iffontsavailable{Source Serif Pro,%
-                      Source Serif Pro Light,%
-                      Source Serif Pro Italic,%
-                      Source Serif Pro Light Italic}{%
-      \setmainfont[BoldFont={Source Serif Pro},%
-                   ItalicFont={Source Serif Pro Light Italic},%
-                   BoldItalicFont={Source Serif Pro Italic},%
-                   Scale=0.95]{Source Serif Pro Light}%
-    }{}
-    \renewcommand{\addfontfeaturefortabular}{}
-  }{%
-    \PackageWarning{beamerthememetropolis}{%
-      You need to compile with XeLaTeX or LuaLaTeX to select the Source Pro fonts%
-    }%
-  }
-}
+% \newcommand{\metropolis@font@typeface@fira}{%
+%   \ifboolexpr{bool {xetex} or bool {luatex}}{
+%     \iffontsavailable{Fira Sans Light,%
+%                       Fira Sans Light Italic,%
+%                       Fira Sans,%
+%                       Fira Sans Italic}%
+%     {%
+%       \setsansfont[ItalicFont={Fira Sans Light Italic},%
+%                    BoldFont={Fira Sans},%
+%                    BoldItalicFont={Fira Sans Italic}]%
+%                   {Fira Sans Light}%
+%     }{%
+%       \iffontsavailable{Fira Sans Light OT,%
+%                         Fira Sans Light Italic OT,%
+%                         Fira Sans OT,%
+%                         Fira Sans Italic OT}%
+%       {%
+%         \setsansfont[ItalicFont={Fira Sans Light Italic OT},%
+%                      BoldFont={Fira Sans OT},%
+%                      BoldItalicFont={Fira Sans Italic OT}]%
+%                     {Fira Sans Light OT}%
+%       }{%
+%         \PackageWarning{beamerthememetropolis}{%
+%           Could not find Fira Sans fonts%
+%         }
+%       }
+%     }
+%     \iffontsavailable{Fira Sans Bold}{%
+%       \setfontfamily\extraboldsans{Fira Sans Bold}%
+%     }{%
+%       \iffontsavailable{Fira Sans Bold OT}{%
+%         \setfontfamily\extraboldsans{Fira Sans Bold OT}%
+%       }{%
+%         \PackageWarning{beamerthememetropolis}{%
+%           Could not find Fira Sans Bold font%
+%         }
+%       }
+%     }
+%     \iffontsavailable{Fira Code, Fira Code Medium}{%
+%       \setmonofont[BoldFont={Fira Code Medium},Scale=0.9]{Fira Code}%
+%     }{%
+%       \iffontsavailable{Fira Mono, Fira Mono Medium}{%
+%         \setmonofont[BoldFont={Fira Mono Medium},Scale=0.9]{Fira Mono}%
+%       }{%
+%         \iffontsavailable{Fira Mono OT, Fira Mono Medium OT}{%
+%           \setmonofont[BoldFont={Fira Mono Medium OT},Scale=0.9]{Fira Mono OT}%
+%         }{%
+%           \PackageWarning{beamerthememetropolis}{%
+%             Could not find Fira Code or Fira Mono fonts%
+%           }
+%         }
+%       }
+%     }
+%     \iffontsavailable{Charter BT}{%
+%       \setmainfont{Charter BT}%
+%     }{%
+%       \iffontsavailable{Charter}{%
+%         \setmainfont{Charter}%
+%       }{
+%         \iffontsavailable{XCharter}{%
+%           \setmainfont{XCharter}%
+%         }{}%
+%       }%
+%     }
+%     \renewcommand{\addfontfeaturefortabular}{\addfontfeature{Numbers={Monospaced}}}
+%   }{%
+%     \PackageWarning{beamerthememetropolis}{%
+%       You need to compile with XeLaTeX or LuaLaTeX to select the Fira fonts%
+%     }%
+%   }
+% }
 
-\newcommand{\metropolis@font@typeface@arial}{%
-  \ifboolexpr{bool {xetex} or bool {luatex}}{
-    \iffontsavailable{Arial Light,%
-                      Arial Light Italic,%
-                      Arial Medium,%
-                      Arial Medium Italic,%
-                      Arial Bold}%
-    {%
-      \setsansfont[ItalicFont={Arial Light Italic},%
-                   BoldFont={Arial Medium},%
-                   BoldItalicFont={Arial Medium Italic},%
-                   Scale=1.0]%
-                  {Arial Light}%
-      \setfontfamily\extraboldsans{Arial Bold}%
-    }{%
-        \iffontsavailable{Inter Light,%
-                          Inter Light Italic,%
-                          Inter Medium,%
-                          Inter Medium Italic,%
-                          Inter Bold}%
-        {%
-          \setsansfont[ItalicFont={Inter Light Italic},%
-                       BoldFont={Inter Medium},%
-                       BoldItalicFont={Inter Medium Italic},%
-                       Scale=0.9]%
-                    {Inter Light}%
-          \setfontfamily\extraboldsans{Inter Bold}%
-        }{%
-            \PackageWarning{beamerthememetropolis}{%
-                Could not find Arial or Inter fonts%
-            }
-        }
-    }
-    \iffontsavailable{Courier New}{%
-      \setmonofont[Scale=0.85]{Courier New}%
-    }{%
-      \PackageWarning{beamerthememetropolis}{%
-        Could not find Courier New fonts%
-      }
-    }
-    \iffontsavailable{Times}{%
-      \setmainfont[]{Times}%
-    }{%
-      \iffontsavailable{Times New Roman}{%
-        \setmainfont[]{Times New Roman}%
-      }{}
-    }
-    \renewcommand{\addfontfeaturefortabular}{}
-  }{%
-    \PackageWarning{beamerthememetropolis}{%
-      You need to compile with XeLaTeX or LuaLaTeX to select the Arial fonts%
-    }%
-  }
-}
+% \newcommand{\metropolis@font@typeface@pochoir}{%
+%   \ifboolexpr{bool {xetex} or bool {luatex}}{
+%     \iffontsavailable{Pochoir Pleine}%
+%     {%
+%       \setsansfont[Scale=1.0]{Pochoir Pleine}%
+%       \setfontfamily\extraboldsans{Pochoir Pleine}%
+%     }{%
+%         \iffontsavailable{Inter Light,%
+%                           Inter Light Italic,%
+%                           Inter Medium,%
+%                           Inter Medium Italic,%
+%                           Inter Bold}%
+%         {%
+%           \setsansfont[ItalicFont={Inter Light Italic},%
+%                        BoldFont={Inter Medium},%
+%                        BoldItalicFont={Inter Medium Italic},%
+%                        Scale=0.9]%
+%                     {Inter Light}%
+%           \setfontfamily\extraboldsans{Inter Bold}%
+%         }{%
+%             \PackageWarning{beamerthememetropolis}{%
+%                 Could not find Arial or Inter fonts%
+%             }
+%         }
+%     }
+%     \iffontsavailable{Courier New}{%
+%       \setmonofont[Scale=0.85]{Courier New}%
+%     }{%
+%       \PackageWarning{beamerthememetropolis}{%
+%         Could not find Courier New fonts%
+%       }
+%     }
+%     \iffontsavailable{Times}{%
+%       \setmainfont[]{Times}%
+%     }{%
+%       \iffontsavailable{Times New Roman}{%
+%         \setmainfont[]{Times New Roman}%
+%       }{}
+%     }
+%     \renewcommand{\addfontfeaturefortabular}{}
+%   }{%
+%     \PackageWarning{beamerthememetropolis}{%
+%       You need to compile with XeLaTeX or LuaLaTeX to select the Arial fonts%
+%     }%
+%   }
+% }
 
+\newfontfamily{\pochoir}[Path=sty/fonts/,Extension=.ttf]{Pochoir_pleine}
 
 \setbeamerfont{title}{size=\Large,%
-                      series=\bfseries}
+                      family=\pochoir}
 \setbeamerfont{author}{size=\small}
 \setbeamerfont{date}{size=\small}
 \setbeamerfont{section title}{size=\Large,%
-                              series=\bfseries}
+                              family=\pochoir}
 \setbeamerfont{block title}{size=\normalsize,%
                             series=\bfseries}
 \setbeamerfont{block title alerted}{size=\normalsize,%
@@ -311,8 +265,8 @@
 \setbeamerfont{alerted text}{series=\bfseries}
 \setbeamerfont{warning text}{series=\bfseries}
 \setbeamerfont*{subtitle}{size=\large}
-\setbeamerfont{frametitle}{size=\large,%
-                           series=\bfseries}
+\setbeamerfont{frametitle}{size=\Large,%
+                           family=\pochoir}
 \setbeamerfont{caption}{size=\small}
 \setbeamerfont{caption name}{series=\bfseries}
 \setbeamerfont{description item}{series=\bfseries}
