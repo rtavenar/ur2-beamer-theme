@@ -1,0 +1,310 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Bases},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Bases]{CM 1 - Bases}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]{Dans ce cours}  
+  \begin{itemize}
+    \item Environnement de développement : VS Code
+    \item 1 TD (/ projet) = 1 Script Python
+    \item Structure de votre code
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      # 1. Les imports
+  
+      # 2. Les fonctions
+  
+      # 3. Les tests
+      \end{minted}
+    \end{beamercodeblock}
+    \item Polycopié associé : \url{https://rtavenar.github.io/poly_python/}
+  \end{itemize}
+
+\end{frame}
+
+\section{Variables \& Structures de contrôle}
+
+\begin{frame}[fragile]{Variables}  
+  Pour définir une variable en Python :
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+    chaine_exemple = "une valeur"
+    entier_exemple = 123
+    autre_entier = entier_exemple ** 2  # Élévation à la puissance
+    encore_un_autre = entier_exemple % 2  # Opérateur "modulo"
+    un_flottant_ici = entier_exemple / 2  # Division à virgule
+    un_entier_la = entier_exemple // 2  # Division entière
+    \end{minted}
+  \end{beamercodeblock}
+  Le type dépend de la valeur affectée.
+
+  Il vous est demandé d'utiliser des \alert{noms de variable explicites}.
+\end{frame}
+
+\begin{frame}[fragile]{Structures conditionnelles}  
+  Syntaxe du \mintinline{python}|if ... elif ... else|
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+    if condition:
+      # Code si Vrai
+    elif autre_condition:
+      # Code si Vrai
+    else:
+      # Code sinon
+    \end{minted}
+  \end{beamercodeblock}
+  Attention à \alert{l'indentation} !
+
+  Les clauses \mintinline{python}|elif| et \mintinline{python}|else| sont optionnelles.
+
+  \mintinline{python}|condition| et \mintinline{python}|autre_condition| sont des expressions booléennes.
+\end{frame}
+
+\begin{frame}[fragile]{Expressions booléennes}
+  Exemples d'expressions booléennes :
+  \begin{itemize}
+    \item \mintinline{python}|x > 10|
+    \item \mintinline{python}|y <= 8|
+    \item \mintinline{python}|z == "a"|
+    \item \mintinline{python}|a != "a"|
+    \item \mintinline{python}|(a > 10) or (b == 5)|
+    \item \mintinline{python}|(a > 10) or c| \\ où \mintinline{python}|c| est une variable de type \mintinline{python}|bool|
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrivez une expression conditionnelle, qui à partir d'une température d'eau stockée dans une variable \mintinline{python}|c| affiche si l'eau à cette température est à l'état liquide, solide ou gazeux.
+  \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Boucles for}  
+  Syntaxe du \mintinline{python}|for|
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      for i in range(10):  # i allant de 0 à 9
+        # Code à répéter pour toutes les valeurs de i
+    
+      for i in range(5, 20):  # i allant de 5 à 19
+        # Code à répéter pour toutes les valeurs de i
+    \end{minted}
+  \end{beamercodeblock}
+  Attention à \alert{l'indentation} !
+
+  En Python, la boucle \mintinline{python}|for| permet d'itérer sur \alert{une séquence de valeurs}.
+\end{frame}
+
+\begin{frame}[fragile]{Boucles while}  
+  Syntaxe du \mintinline{python}|while|
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      while condition:
+        # Code à répéter tant que condition vaut Vrai
+    \end{minted}
+  \end{beamercodeblock}
+  Attention à \alert{l'indentation} !
+
+  \mintinline{python}|condition| est une expression booléenne (comme pour le \mintinline{python}|if|).
+\end{frame}
+
+\begin{frame}[fragile]{Quelle boucle choisir ?}  
+  Pour choisir entre  \mintinline{python}|for| et \mintinline{python}|while|
+  
+  \begin{itemize}
+    \item Si nombre d'itérations fixé $\Rightarrow$ \mintinline{python}|for|
+    \item Si on veut répéter le même traitement pour toutes les valeurs d'une séquence (\mintinline{python}|range|, liste, dictionnaire) $\Rightarrow$ \mintinline{python}|for|
+    \item Sinon $\Rightarrow$ \mintinline{python}|while|
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrivez une fonction en Python qui affiche tous les termes plus petits que 1000 de la suite $(u_n)$ définie comme :
+
+$$
+\begin{array}{rcc}u_0 & = & 2 \\
+\forall n \geq 1, \, u_n & = & u_{n-1}^2\end{array}
+$$
+  \end{quote}
+\end{frame}
+
+\section{Fonctions}
+
+\begin{frame}[fragile]{Définir une fonction en Python (1/2)}  
+  Une fonction a (peut avoir) des paramètres et une valeur de retour :
+    
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      def affiche_pair(n):
+        for i in range(n):
+          if i % 2 == 0:
+            print(i)
+      \end{minted}
+    \end{beamercodeblock}
+
+  \begin{itemize}
+    \item Nom de la fonction : \mintinline{python}|affiche_pair|
+    \item Paramètre(s) / Argument(s) : \mintinline{python}|n| (1 seul paramètre / argument)
+    \item Valeur de retour : Pas de valeur de retour ici (pas de \mintinline{python}|return|)
+  \end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]{Définir une fonction en Python (2/2)}  
+  Une fonction a (peut avoir) des paramètres et une valeur de retour :
+    
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      def est_pair(i):
+        return (i % 2 == 0)
+      \end{minted}
+    \end{beamercodeblock}
+
+  \begin{itemize}
+    \item Nom de la fonction : \mintinline{python}|est_pair|
+    \item Paramètre(s) / Argument(s) : \mintinline{python}|i| (1 seul paramètre / argument)
+    \item Valeur de retour : valeur booléenne indiquant si \mintinline{python}|i| est pair
+  \end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]{Appel de fonction existante}  
+  Deux façons d'appeler une fonction en Python :
+  \begin{enumerate}
+    \item Si elle retourne une valeur que l'on souhaite utiliser :
+    
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      x = est_pair(5)  # x est de type bool
+
+      # ou bien
+      print(est_pair(5))
+
+      # ou encore
+      if est_pair(5):
+        print("Youhou")
+      \end{minted}
+    \end{beamercodeblock}
+
+    \item Si elle ne retourne rien ou que sa valeur de \alert{retour} ne nous intéresse pas :
+    
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      affiche_pair(5)
+      \end{minted}
+    \end{beamercodeblock}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Les paramètres optionnels}  
+  Une fonction peut avoir des paramètres optionnels :
+    
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      def est_multiple(i, p=2):
+        return (i % p == 0)
+      
+      print(est_multiple(9, 3))  # Affiche True
+      print(est_multiple(9))     # Affiche False
+      \end{minted}
+    \end{beamercodeblock}
+
+  Les paramètres optionnels sont toujours placés \alert{après} les paramètres non optionnels.
+\end{frame}
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrivez une fonction en Python qui prenne en argument une longueur \mintinline{python}|long| et retourne l'aire du triangle équilatéral de côté \mintinline{python}|long|.
+  \end{quote}
+\end{frame}
+
+\section{Chaînes de caractères}
+
+\begin{frame}[fragile]{Le type str}  
+  Il existe en Python de nombreuses fonctions pour manipuler simplement les chaînes de caractères :
+    
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+      x = "une chaîne de caractères "
+      y = "et une autre"
+      print(len(x))  # Affiche 25
+      print(x + y)   # Affiche une chaîne de caractères et une autre
+      print(y * 3)   # Affiche et une autreet une autreet une autre
+
+      age = 25
+      print(f"L'âge est de {age} ans.")  # Affiche L'âge est de 25 ans.
+      \end{minted}
+    \end{beamercodeblock}
+\end{frame} 
+
+\begin{frame}[fragile]{Les méthodes de la classe str}
+  \begin{tabular}{ll}
+    \hline
+    Code & Action \\
+    \hline
+    \mintinline{python}|ch.count(sub)| & Compte les occurrences \\
+    \mintinline{python}|ch.endswith(suffix)| & Teste la fin de la chaîne \\
+    \mintinline{python}|ch.startswith(prefix)| & Teste le début de la chaîne \\
+    \mintinline{python}|ch.find(sub)| & Indice du début de la première occurrence \\
+    \mintinline{python}|ch.rfind(sub)| & Indice du début de la dernière occurrence \\
+    \mintinline{python}|ch.lower()| & \mintinline{python}|ch| en minuscules \\
+    \mintinline{python}|ch.upper()| & \mintinline{python}|ch| en majuscules \\
+    \mintinline{python}|ch.replace(old, new)| & \begin{tabular}{l}Copie de \mintinline{python}|ch| dans laquelle toutes les\\ occurrences de \mintinline{python}|old| ont été remplacées \\par \mintinline{python}|new|\end{tabular} \\
+    \mintinline{python}|ch.split(sep=None)| & Découpe \mintinline{python}|ch| à chaque occurrence de \mintinline{python}|sep| \\
+    \hline
+  \end{tabular}
+\end{frame} 
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrivez une fonction qui prenne en argument deux chaînes de caractères \mintinline{python}|s| et \mintinline{python}|prefix| et retourne le nombre de mots de la chaîne \mintinline{python}|s| qui débutent par la chaîne \mintinline{python}|prefix|.
+  \end{quote}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,301 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Structures de données},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Dictionnaires]{CM 4 - Dictionnaires et Sets}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Les dictionnaires}
+
+\begin{frame}[fragile]{Parcours de dictionnaires (1/2)}  
+  3 parcours de dictionnaires en Python :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      mon_dico = {"a": 4, "c": 3, "z": 3}
+
+      for val in mon_dico.values():  # Parcours par valeur
+        print(val)
+
+      for cle in mon_dico.keys():  # Parcours par clé
+        print(cle)
+      
+      for cle, val in mon_dico.items():  # Parcours par clé ET valeur
+        print(cle, valeur)
+    \end{minted}
+  \end{beamercodeblock}
+
+  \pause
+
+  Question subsidiaire : que vaut \mintinline{python}|x| dans le parcours suivant ?
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      for x in mon_dico:
+        print(x)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Parcours de dictionnaires (2/2)}  
+  On dispose d'un dictionnaire \mintinline{python}|d = {"a": 4, "c": 3, "z": 3}|.
+
+  Quel parcours utiliser pour\dots
+
+  \begin{itemize}
+    \item Déterminer le minimum des valeurs du dictionnaire \mintinline{python}|d| ? \pause \alert{Par valeur}
+    \item Déterminer la clé correspondant du minimum des valeurs du dictionnaire \mintinline{python}|d| ? \pause \alert{Par clé ET valeur}
+    \item Créer un nouveau dictionnaire défini comme \mintinline{python}|{"a": f(4), "c": f(3), "z": f(3)}| ? \pause \alert{Par clé ET valeur}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{(arg)max/(arg)min d'un dictionnaire}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      max_val = PAS_BEAUCOUP_DU_TOUT  # Mais quoi ?
+      for val in mon_dico.values():
+        if val > max_val:
+          max_val = val
+      # À la fin de la boucle, la valeur maximale est stockée dans `max_val`
+    \end{minted}
+  \end{beamercodeblock}
+
+  \pause
+  
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      max_val = PAS_BEAUCOUP_DU_TOUT  # Mais quoi ?
+      cle_max = None
+      for cle, val in mon_dico.items():
+        if val > max_val:
+          max_val = val
+          cle_max = cle
+      # À la fin de la boucle, l'argmax est stocké dans `cle_max`
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Les clés de dictionnaires}
+  Un dictionnaire peut avoir pour clés :
+  \begin{itemize}
+    \item des chaînes de caractères
+    \item des entiers
+    \item des flottants (mais c'est une mauvaise idée)
+    \item des tuples (ex : \mintinline{python}|(1, 3)|)
+    \item \alert{mais PAS des listes ni des dictionnaires}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Accéder à une valeur via sa clé}
+  Si l'on souhaite accéder à la valeur associée à la clé \mintinline{python}|"xyz"|, pas besoin de parcourir !
+
+  \pause
+  
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      # Option 1
+      if "xyz" in mon_dico.keys():
+        print(mon_dico["xyz"])
+      else:
+        print("Clé 'xyz' absente du dico")
+
+      # Option 2 (A TOUJOURS FAVORISER)
+      print(mon_dico.get("xyz", "Clé 'xyz' absente du dico"))
+    \end{minted}
+  \end{beamercodeblock}
+
+\end{frame}
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrire une fonction qui prend en entrée une chaîne de caractère et retourne le caractère le plus fréquent de cette chaîne.
+  \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Pièges}
+  Comme pour les listes, on devra prendre garde aux pièges suivants :
+  
+  \begin{itemize}
+    \item On ne doit \alert{jamais} parcourir un dictionnaire pendant qu'on lui insère / supprime des paires clés-valeurs ;
+    \item Si l'on souhaite effectuer une copie de dictionnaire, il est bon d'utiliser la fonction \mintinline{python}|dict()| (se référer au module \mintinline{python}|deepcopy| si besoin de copies profondes).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exercice}
+
+  \begin{quote}
+    On a vu dans le cours précédent qu'une matrice peut être représentée comme une liste de listes.
+    Proposez une structure de données plus adaptée pour représenter les matrices creuses 
+    (c'est-à-dire les matrices dans lesquelles de nombreuses valeurs valent 0), comme dans l'exemple suivant :
+
+        $$
+        \left(
+          \begin{matrix}
+            0 & 0 & 0 \\
+            0 & 1 & 0
+          \end{matrix}
+        \right)
+        $$
+
+    Comment faut-il faire pour accéder à l'élément d'indice $(i, j)$ d'une matrice ainsi représentée ?
+  \end{quote}
+\end{frame}
+
+\section{Les sets}
+
+\begin{frame}[fragile]{Les sets : Vision simplifiée}
+  Un \emph{set} peut être vu comme un \alert{dictionnaire sans valeurs} (que des clés).
+
+  Quelle utilité ?
+  \begin{itemize}
+    \item stocker des ensembles sans répétition
+    \item construction simple à partir de liste ou chaîne :
+          \begin{beamercodeblock}
+            \begin{minted}[fontsize=\footnotesize]{python}
+              set([1, 3, 2, 1])  # {1, 3, 2}
+              set("abcdcb")      # {"a", "b", "c", "d"}
+            \end{minted}
+          \end{beamercodeblock}
+    \item méthodes sur les \emph{sets} :
+    \begin{itemize}
+      \item insertion    \mintinline{python}|mon_set.add(item)| \\ (si doublon, pas d'insertion)
+      \item union        \mintinline{python}+{"a", "b"} | {"b", "c"}+ ou \mintinline{python}|{"a", "b"}.union({"b", "c"})|
+      \item intersection \mintinline{python}|{"a", "b"} & {"b", "c"}| ou \mintinline{python}|{"a", "b"}.intersection({"b", "c"})|
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice}
+  \begin{quote}
+    Écrire une fonction qui prend en entrée une chaîne de caractère et retourne le caractère le plus fréquent de cette chaîne (sans utiliser de dictionnaire).
+  \end{quote}
+\end{frame}
+
+\section{Structures imbriquées}
+
+
+\begin{frame}[fragile]{Structures imbriquées : symptômes}
+  En pratique, les vraies données sont souvent du type :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      [
+        {
+          "address": {
+            "building": "1449",
+            "street": "Nostrand Avenue",
+            "zipcode": "11226"
+          },
+          "grades": [
+            {"date": "2014-10-21T02:00:00", "grade": "B"},
+            # [...]
+            {"date": "2011-12-14T01:00:00", "grade": "A"}
+          ],
+          "name": "Nostrand Donut Shop"
+        },
+        # [...]
+      ]
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+
+\begin{frame}[fragile]{Structures imbriquées : remèdes}
+  Pour visualiser :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      from pprint import pprint
+
+      pprint(ma_structure_compliquee)
+    \end{minted}
+  \end{beamercodeblock}
+ 
+  Pour accéder aux éléments :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      pprint(ma_structure_compliquee[0])  # Visualiser un niveau, 
+                                          # comprendre son type
+    \end{minted}
+  \end{beamercodeblock}
+
+  \pause
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      pprint(ma_structure_compliquee[0]["address"])  # Visualiser un niveau, 
+                                                     # comprendre son type
+    \end{minted}
+  \end{beamercodeblock}
+ \end{frame}
+
+ \begin{frame}[fragile]{Exercice}
+  \begin{quote}
+    Écrivez un morceau de code qui permet de stocker l'ensemble des notes (\mintinline{python}|"A"|, \mintinline{python}|"B"|, \emph{etc.}) attribuées (sans doublon) dans le jeu de données ci-dessous.
+  \end{quote}
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      [
+        {
+          "address": {"building": "1449", "street": "Nostrand Avenue"},
+          "grades": [
+            {"date": "2014-10-21T02:00:00", "grade": "B"},
+            # [...]
+            {"date": "2011-12-14T01:00:00", "grade": "A"}
+          ],
+          "name": "Nostrand Donut Shop"
+        },
+        # [...]
+      ]
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\end{document}

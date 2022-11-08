@@ -1,0 +1,221 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Structures de données},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- numpy]{CM 5 - Les librairies numpy et scipy}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]{Présentation des librairies}  
+  Calcul numérique en Python :
+  \begin{itemize}
+    \item \mintinline{python}|numpy| : calculs numériques de base (opérations arithmétiques, \dots)
+    \item \mintinline{python}|scipy| : fonctions avancées (calculs de distance, Transformée de Fourier, résolution de systèmes d'équations, \emph{etc.})
+  \end{itemize}
+
+  \pause
+
+  Ces opérations déjà implémentées sont \alert{beauuuuuuuuucoup} plus rapides que si vous les codiez vous-même. \\
+  \alert{But du jeu :} se reposer sur les opérateurs existants tant que possible \\
+  $\Rightarrow$ \alert{NE PAS} coder des boucles sur les indices de tableaux \mintinline{python}|numpy|
+
+\end{frame}
+
+\begin{frame}[fragile]{Le type numpy.ndarray}  
+  Le type de base des objets manipulés est \mintinline{python}|numpy.ndarray| (tableau à $n$ dimensions) :
+  \begin{itemize}
+    \item 1 dimension : vecteur
+    \item 2 dimensions : matrice
+    \item 3 dimensions et plus : tenseur
+  \end{itemize}
+
+  \alert{Le terme dimension ici n'a pas le même sens qu'en maths !}
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      print(x.ndim)
+    \end{minted}
+  \end{beamercodeblock}
+
+  Pour obtenir la taille d'un \mintinline{python}|numpy.ndarray| : 
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      print(x.shape)  # Affiche un tuple
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice (1/2)}
+  Soit la matrice suivante :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import numpy as np
+      m = np.array([[1, 2, 3],
+                    [0, 0, 0],
+                    [9, 8, 7]])
+      u = np.array([[6, 2, 3],
+                    [0, 4, 1],
+                    [0, 8, 7]])
+    \end{minted}
+  \end{beamercodeblock}
+
+  \bigskip
+
+  \begin{quote}
+    Que vaut \mintinline{python}|m + 1| ? \\
+    Que vaut \mintinline{python}|m + u| ? \\
+    Que vaut \mintinline{python}|m * 1| ? \\
+    Que vaut \mintinline{python}|m * u| ? \\
+    Que vaut \mintinline{python}|m @ u| ?
+  \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice (2/2)}
+  Soit la matrice suivante :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import numpy as np
+      m = np.array([[1, 2, 3],
+                    [9, 8, 7]])
+    \end{minted}
+  \end{beamercodeblock}
+
+  \bigskip
+
+  \begin{quote}
+    Que vaut \mintinline{python}|m.sum()| ? \\
+    Que vaut \mintinline{python}|m.sum(axis=0)| ? \\
+    Que vaut \mintinline{python}|m.sum(axis=1)| ?
+  \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Indiçage (1/3)}
+  On peut utiliser les mêmes stratégies d'indiçage que pour les listes : 
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import numpy as np
+      m = np.array([[1, 2, 3],
+                    [9, 8, 7]])
+
+      print(m[0, :])     # Équivalent à print(m[0])
+      print(m[:, 0])
+      print(m[1:, :-1])
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Indiçage (2/3)}
+  Petite spécificité \mintinline{python}|numpy| :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import numpy as np
+      v = np.array([1, 2, 3])
+      w = np.array([0, 10, 20])
+
+      print(v.shape)              # (3, )
+      print(v[:, None].shape)     # (3, 1)
+      print(v[None, :].shape)     # (1, 3)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Indiçage (3/3)}
+  Indiçage avec \mintinline{python}|None| : pour quoi faire ???
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      mat = np.zeros((3, 3))
+      for i in range(len(v)):
+        for j in range(len(w)):
+          mat[i, j] = v[i] + w[j]
+      
+      # Remplacé par :
+      mat = v[:, None] + w[None, :]
+      #     ^ (3, 1)     ^ (1, 3)
+    \end{minted}
+  \end{beamercodeblock}
+
+  $$
+    \left(
+      \begin{matrix}
+        v_0 + w_0 & v_0 + w_1 & v_0 + w_2 \\
+        v_1 + w_0 & v_1 + w_1 & v_1 + w_2 \\
+        v_2 + w_0 & v_2 + w_1 & v_2 + w_2
+      \end{matrix}
+    \right)
+  $$
+
+  Cette astuce fonctionne pour n'importe quelle dimension.
+\end{frame}
+
+\begin{frame}[fragile]{Exercices}
+  \begin{quote}
+    \begin{enumerate}
+      \item Si \mintinline{python}|m| est de \emph{shape} \mintinline{python}|(3, 2)| et que \mintinline{python}|n| est de \emph{shape} \mintinline{python}|(3, 4)|, 
+    à quoi ressemblera \mintinline{python}|m[:, None, :] + n[:, :, None]| ?
+    
+      \item Écrivez une fonction qui prend en entrée deux vecteurs numpy et retourne la matrice des distances Euclidiennes paires à paires de leurs éléments :
+    
+    $$
+    \left(
+      \begin{matrix}
+        d(v_0, w_0) & d(v_0, w_1) \\
+        d(v_1, w_0) & d(v_1, w_1) \\
+        d(v_2, w_0) & d(v_2, w_1)
+      \end{matrix}
+    \right)
+  $$
+    \end{enumerate}
+  \end{quote}
+\end{frame}
+
+\end{document}

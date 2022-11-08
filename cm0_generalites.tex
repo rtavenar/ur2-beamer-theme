@@ -1,0 +1,473 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Généralités},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Généralités]{CM 0 - Généralités}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Format du cours}  
+  \begin{itemize}
+    \item 12 semaines
+    \begin{itemize}
+      \item 1h CM, 1h TD
+    \end{itemize}
+    \item Travail personnel à prévoir
+    \begin{itemize}
+      \item 2h par semaine en moyenne (donc + pour certain(e)s)
+      \item Projets
+      \item Préparation de cours + QCM
+    \end{itemize}
+    \item Évaluation
+    \begin{itemize}
+      \item 2 contrôles continus
+      \item Projets
+      \item Méthode de calcul de la note finale encore inconnue
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Contenu du cours}  
+  \begin{itemize}
+    \item 4 grandes parties
+    \begin{enumerate}
+      \item Bases du langage
+      \item Structures de données (listes, dictionnaires, \emph{etc.})
+      \item Accès aux données (fichiers, requêtes HTTP)
+      \item Programmation Orientée Objet
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Organisation (1/2)}  
+  \begin{itemize}
+    \item À chaque nouvelle partie
+    \begin{itemize}
+      \item Les CM + TD + Projet de la partie sont mis en ligne
+      \item (pas de projet pour la partie 1)
+    \end{itemize}
+    \item Avant chaque CM
+    \begin{itemize}
+      \item Un ou plusieurs chapitres de cours à travailler (polycopié)
+      \item Un QCM CURSUS à remplir
+    \end{itemize}
+    \item Après chaque TD
+    \begin{itemize}
+      \item Finir le TD par soi-même
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Organisation (2/2)}  
+  \begin{itemize}
+    \item En séance de CM
+    \begin{itemize}
+      \item Focus sur quelques points saillants du cours
+      \item Venir avec ses questions sur le cours
+      \item Venir avec ses questions sur le projet
+    \end{itemize}
+    \item En séance de TD, par ordre de priorité :
+    \begin{enumerate}
+      \item Le TD du jour
+      \item Le(s) TD(s) suivant(s) de la partie en cours
+      \item Le projet de la partie en cours
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Dualité TD / Projet}  
+  \begin{itemize}
+    \item Pourquoi TD \alert{et} projet ?
+    \begin{itemize}
+      \item Hétérogénéité de niveau en Python (début d'année)
+      \item Apprendre un langage de programmation implique de la répétition
+      \item Python sera un (LE ?) langage central de vos études en Master
+    \end{itemize}
+    \item Principe de base :
+    \begin{itemize}
+        \item Je sais faire les TD sans problème $\Rightarrow$ je vise 10/20
+        \item Je sais faire les TD et les projets sans problème $\Rightarrow$ je vise 20/20
+    \end{itemize}  
+  \end{itemize}
+\end{frame}
+
+% \begin{frame}{Table des Matières sur 2 colonnes}
+% \twocol{\tableofcontents[sections={1-2}]}{\tableofcontents[sections={3-4}]}
+
+% \end{frame}
+
+
+% \section{Champ des possibles}
+
+% \subsection{Usage}
+
+% \begin{frame}[fragile]{Usage}
+%   \begin{itemize}
+%     \item Copiez le répertoire \texttt{sty/} dans votre projet.
+  
+%     \item Utilisez ce thème en incluant l'en-tête suivante dans votre document Beamer :\medskip
+  
+%     \begin{minted}{latex}
+%     \usetheme[maincolor=red]{metropolis-ur2}
+%     \end{minted}
+    
+%     \medskip
+%     \item Plus précisément, ce document a été généré avec l'en-tête : \medskip
+    
+%     \begin{beamercodeblock}\vspace{-.6em}
+%       \begin{minted}[linenos,fontsize=\footnotesize]{latex}
+%         \usetheme[%
+%             progressbar=frametitle, block=fill,
+%             numbering=fraction, footer=crumbs,
+%             sectionpage=numbered, subsectionpage=none,
+%             titleformattitle=smallcaps, titleformatsubtitle=smallcaps,
+%             %%% Options spécifiques au thème UR2:
+%             maincolor=red]{metropolis-ur2}
+%       \end{minted}
+%     \end{beamercodeblock}
+%     \beamercaptionblock{\textbf{Extrait de code :} Options de thème.}
+%   \end{itemize}
+% \end{frame}
+
+% \subsection{Options du thème}
+
+% {
+% \metroset{maincolor=grey}
+% \begin{frame}[fragile,stretch=3]{Options : Couleur}
+
+%     \begin{itemize}
+%     \item L'option \texttt{maincolor} permet de définir le jeu de couleurs à utiliser pour la diapositive en cours.
+    
+%     \item Les trois choix possibles sont \colorbox{ur2Rouge}{\textcolor{white}{\texttt{red}}} (par défaut), \colorbox{white}{\textcolor{black}{\texttt{white{\vphantom l}}}} ou \colorbox{ur2Gris}{\textcolor{white}{\texttt{grey{\vphantom l}}}}.
+
+%     \item Ce diaporama utilise \texttt{maincolor=red} mais cette diapositive a été forcée à \texttt{maincolor=grey} via :\medskip
+
+%           \mint{latex}|   \metroset{maincolor=grey}|
+%     \medskip
+%     (voir le code source de cet exemple pour plus d'infos)
+%     \end{itemize}
+% \end{frame}
+% }
+
+% \begin{frame}[stretch]{Options : Logos}
+%   \begin{itemize}
+%     \item L'option \texttt{titlelogo} définit le logo à insérer dans la diapositive de titre.  Les valeurs possibles sont :
+%     \begin{itemize}
+%         \item \texttt{none}: pas de logo
+%         \item \texttt{urdeux}: le logo UR2 \alert{\bf (par défaut)}
+%     \end{itemize}
+%     \item L'option \texttt{headlogo} fait la même chose pour le logo de la ligne de titre des diapositives.
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Options : Divers}
+%   En plus des options standard du thème \textsc{Metropolis}, ce thème utilise quelques options issues de \textsc{colorful-dream}:
+
+%   \begin{itemize}
+%     \item \texttt{footer=crumbs} indique la section / sous-section en cours dans le bas de page.
+%     \item \texttt{sectionpage=numbered} génère une page de titre pour chaque section.
+%     \item \texttt{subsectionpage=numbered} fait de même pour les \texttt{subsections} \textit{(pas activé dans cette présentation)}.
+%   \end{itemize}
+% \end{frame}
+
+% \subsection{Layout}
+
+% \begin{frame}[fragile,stretch=3.5]{Layout: Spacing}
+% It's nice to have less text per slide!
+
+% \begin{itemize}
+%     \item Frames now have an additional \alert{\texttt{stretch}} key with a stretch factor as an optional value (defaults to~\texttt{2}).  It will \alert{increase spacing} between paragraphs and list items.
+
+%     \item The idea is to make it easier to stretch slide contents, \emph{without} littering the code with \mintinline{latex}{\vspace{...}} commands everywhere.
+
+%     \item This slide uses \texttt{stretch=3.5}.
+% \end{itemize}
+
+% \end{frame}
+
+% \begin{frame}[fragile]{Layout: Two-column layout}
+% To quickly get a two-column layout, you can use:\medskip
+    
+%     \mint{latex}|\twocol{First column here.}{Second column here.}|
+%     \medskip
+    
+%     By default, this will make both columns equally wide, namely \mintinline{latex}{0.475\linewidth}.
+    
+%     \bigskip
+%     \twocol[0.3]{An optional argument can be used to specify a different factor for the first column.  Here, I used \texttt{0.3}.}{The second column will automatically expand so that the two columns combined take up \mintinline{latex}{0.95\linewidth}. \textit{(This is less than~1 so that there is some padding between them.)}}
+% \end{frame}
+
+
+% \section{Colors}
+
+% \begin{frame}{Colors}
+%   This theme defines the following colors that you can use anywhere in your presentation. They are all based on the color values in JU's official Graphic Manual.
+%   \bigskip
+  
+%   \centering
+%   \begin{tabular}{ >{\raggedleft\arraybackslash} m{3cm} m{1cm}  >{\raggedleft\arraybackslash} m{3cm} m{1cm} }
+%     \tt ur2Rouge & \colorbox{ur2Rouge}{\makebox(14,14){~}} &  \tt ur2Jaune & \colorbox{ur2Jaune}{\makebox(14,14){~}} \\
+%     \tt ur2Gris & \colorbox{ur2Gris}{\makebox(14,14){~}} & \tt ur2Turquoise & \colorbox{ur2Turquoise}{\makebox(14,14){~}} \\
+%     &&
+%     \tt ur2Bleu & \colorbox{ur2Bleu}{\makebox(14,14){~}} \\
+%     &&
+%     \tt ur2GrisClair & \colorbox{ur2GrisClair}{\makebox(14,14){~}} \\
+%   \end{tabular}
+% \end{frame}
+
+% \subsection{Usage}
+
+% \begin{frame}[fragile]{Using Colors}
+
+% Colors can be used with any commands, for example:
+% \begin{center}
+%     \begin{tabular}{ll}
+%     \toprule
+%         \mintinline{latex}{\textcolor{ur2Jaune}{Lorem ipsum}} & \textcolor{ur2Jaune}{Lorem ipsum} \\
+%     \bottomrule
+%     \end{tabular}
+% \end{center}
+
+% \medskip
+% Some predefined commands that use these colors:
+
+% \begin{center}
+%     \begin{tabular}{ll}
+%     \toprule
+%         \mintinline{latex}{\alert{Lorem ipsum}} & \alert{Lorem ipsum} \\
+%         \mintinline{latex}{\alertExample{Lorem ipsum}} & \alertExample{Lorem ipsum} \\
+%         \mintinline{latex}{\highlight{Lorem ipsum}} & \highlight{Lorem ipsum} \\
+
+%     \bottomrule
+%     \end{tabular}
+% \end{center}
+
+% \medskip
+% The colors are also used in different predefined \hyperlink{environments}{\textcolor{ur2Bleu}{environments}} and \hyperlink{blocks}{\textcolor{ur2Bleu}{blocks}}.
+
+% \end{frame}
+
+% \section{Environnements}
+
+% \subsection{Énumérations}
+
+% {\metroset{itemize=colored}
+% \setbeamertemplate{enumerate items}[mycircle]
+% \begin{frame}[fragile,stretch,label=environments]{Enumerate environments}
+%     Combine \mintinline{latex}{\metroset{itemize=colored}} with
+%     {\mintinline{latex}{\setbeamertemplate{enumerate items}[mycircle]}} to get:
+% \medskip
+
+%     \begin{enumerate}
+%         \item One
+%         \begin{enumerate}[a]
+%             \item alpha
+%             \begin{enumerate}[i]
+%                 \item foo
+%                 \item bar
+%                 \item baz
+%             \end{enumerate}
+%             \item omega
+%         \end{enumerate}
+%         \item Two
+%         \item Three
+%     \end{enumerate}
+% \end{frame}
+% }
+
+% \subsection{Quotations}
+
+% \begin{frame}[fragile]{Quotations}
+
+%     \begin{quote}%
+%     Beautiful is better than ugly.
+%     Explicit is better than implicit.
+%     Simple is better than complex. [\ldots]
+%     Readability counts.
+%     \end{quote}
+%     \attribution{Tim Peters, from \textsc{The Zen of Python}}
+
+% \medskip
+% The quotation above can be produced via:
+
+%     {\footnotesize
+%     \begin{minted}{latex}
+%     \begin{quote}
+%       Beautiful is better than ugly.
+%       Explicit is better than implicit.
+%       Simple is better than complex. [\ldots]
+%       Readability counts.
+%     \end{quote}
+%     \attribution{Tim Peters, from \textsc{The Zen of Python}}
+%     \end{minted}
+%     }
+
+% \end{frame}
+
+% \begin{frame}[standout]
+%    This is a standout slide.
+%    \bigskip\bigskip
+   
+%    \normalsize
+%    Standout slides are a Metropolis feature activated through the \texttt{[standout]} frame option.
+%    \bigskip
+   
+%    In contrast to Metropolis defaults, here it will have the logotype headline, footer, and frame numbering.
+% \end{frame}
+
+
+% \subsection{Blocks}
+
+% {\metroset{block=transparent}
+% \begin{frame}[label=blocks]{Blocks}
+%     These are beamer blocks with \texttt{block=transparent}.\medskip
+
+%     \begin{block}{This is a regular \texttt{block}.}
+%     Here is some content.
+%     \end{block}
+
+%     \begin{alertblock}{This is an \texttt{alertblock}.}
+%     Here is some content.
+%     \end{alertblock}
+
+%     \begin{exampleblock}{This is an \texttt{exampleblock}.}
+%     Here is some content.
+%     \end{exampleblock}
+
+%     \begin{warningblock}{This is a \texttt{warningblock}.}
+%     Here is some content.
+%     \end{warningblock}
+% \end{frame}
+% }
+
+% {\metroset{block=fill}
+% \begin{frame}{Blocks}
+%     These are beamer blocks with \texttt{block=fill}.\medskip
+
+%     \begin{block}{This is a regular \texttt{block}.}
+%     Here is some content.
+%     \end{block}
+
+%     \begin{alertblock}{This is an \texttt{alertblock}.}
+%     Here is some content.
+%     \end{alertblock}
+
+%     \begin{exampleblock}{This is an \texttt{exampleblock}.}
+%     Here is some content.
+%     \end{exampleblock}
+
+%     \begin{warningblock}{This is a \texttt{warningblock}.}
+%     Here is some content.
+%     \end{warningblock}
+% \end{frame}
+% }
+
+% \subsection{Code}
+% \begin{frame}[fragile,stretch]{Code Blocks}
+    
+%     Since I frequently need to show code examples, I defined some styles and custom commands that can be included with:
+    
+%     \mint{latex}|\usepackage{myminted}|
+    
+%     This uses the \href{http://tug.ctan.org/macros/latex/contrib/minted/minted.pdf}{{\small\faExternalLink*}~\texttt{minted}} package to typeset code with automatic syntax highlighting.
+%     \medskip
+
+%     \begin{warningblock}{\faExclamationTriangle{}\enspace{}Important}
+%     Every frame that contains code must have the \texttt{[fragile]} option set, or compilation will break with many cryptic errors!
+%     \end{warningblock}
+% \end{frame}
+
+% \begin{frame}[fragile]{Code Blocks}
+%     I also defined some commands to easily produce code blocks like the following; see the \LaTeX{} source for details:\medskip
+    
+%     \begin{beamercodeblock}\vspace{-.6em}
+%       \begin{minted}[linenos,fontsize=\footnotesize]{java}
+%       // Your First Program
+
+%       class HelloWorld {
+%         public static void main(String[] args) {
+%           System.out.println("Hello, World!"); 
+%         }
+%       }
+%       \end{minted}
+%     \end{beamercodeblock}
+%     \beamercaptionblock{\textbf{Listing 1:} A hello world program in Java.}
+
+% \end{frame}
+
+
+% \subsection{Bibliography}
+% \begin{frame}[fragile,stretch]{Bibliography}
+    
+%     I use \texttt{biblatex} with some custom definitions, which I also bundled in their own package:
+    
+%     \mint{latex}|\usepackage{mybiblatex}|
+    
+%     Mainly, this will suppress output of URLs and DOIs, and instead turn the paper title into hyperlinks.  Here's an example:
+
+%     \begin{itemize}
+%         \item \fullcite{iki-aizawa-2020-language}
+%     \end{itemize}
+% \end{frame}
+
+% \appendix
+% \metroset{sectionpage=none}
+% \section{Bibliography}
+
+% \begin{frame}{Bibliography}
+
+%     \nocite{*}
+%     \printbibliography[heading=none]
+    
+%     This slide also demonstrates that appendices work \& play nicely with the other features!
+% \end{frame}
+
+% \begin{frame}[plain,standout,noframenumbering]
+% \urLogoW[height=2.5cm]
+% \end{frame}
+
+\end{document}

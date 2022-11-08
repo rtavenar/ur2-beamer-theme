@@ -1,0 +1,170 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Bases},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Bases (suite)]{CM 2 - Bases (suite)}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Compléments sur les boucles \& fonctions}
+
+\begin{frame}[fragile]{Boucles}  
+  Il est possible de ``perturber'' le comportement d'une boucle (\mintinline{python}|for| ou \mintinline{python}|while|) à l'aide d'une des instructions \mintinline{python}|break| ou \mintinline{python}|continue| :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      for i in range(10):
+        if i == 5:
+          break
+        print(i)
+      
+      for i in range(10):
+        if i == 5:
+          continue
+        print(i)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Fonctions}  
+  Contexte :
+
+  \begin{itemize}
+    \item On doit coder deux fonctions
+    \item L'une des deux est un cas particulier de l'autre
+  \end{itemize}
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+    def fonction_generale(truc, machin, chose):
+      # Ici le corps de la fonction
+      return quelque_chose
+    
+    def fonction_cas_particulier(truc)
+      return fonction_generale(truc=truc, machin=32, chose="abc")
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    \begin{enumerate}
+      \item Écrivez une fonction qui prend en entrée une chaîne de caractères \mintinline{python}|chaine| et un entier \mintinline{python}|n| et affiche les mots de la chaîne \mintinline{python}|chaine| les uns après les autres. \\ Attention : si un mot de longueur exactement égale à \mintinline{python}|n| est rencontré, il faudra afficher ce mot puis s'arrêter (et donc ne pas afficher les mots suivants).
+      \item En utilisant la fonction précédemment codée, écrivez une fonction qui prend en entrée une chaîne de caractères \mintinline{python}|chaine| et affiche les mots de cette chaîne les uns après les autres. \\ Attention : si un mot de longueur exactement égale à \alert{5} est rencontré, il faudra afficher ce mot puis s'arrêter (et donc ne pas afficher les mots suivants).
+    \end{enumerate}
+  \end{quote}
+\end{frame}
+
+\section{Les modules en Python}
+
+\begin{frame}[fragile]{Importer un module}  
+  Variantes de syntaxe pour l'import :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import mon_module
+      [...]
+      print(mon_module.machin)
+
+      import mon_module as truc  # Ici, on renomme
+      [...]
+      print(truc.machin)
+
+      from mon_module import machin  # Ici, on n'importe que `machin`
+      [...]
+      print(machin)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Un module, c'est quoi ?}
+  
+  \pause
+
+  \begin{itemize}
+    \item Un (ensemble de) fichier(s) Python
+    \item Stocké où ?
+    \pause
+    \begin{itemize}
+      \item Dans un dossier qui stocke tous les modules installés (\mintinline{python}|pip install ...|)
+      \item Dans le dossier courant \\ (fichier \mintinline{python}|mon_module.py| $\Rightarrow$ module \mintinline{python}|mon_module|)
+    \end{itemize}
+    \item Que se passe-t-il lors de l'import ?
+    \pause
+    \begin{itemize}
+      \item Le fichier correspondant au module est exécuté \\ (presque équivalent à \emph{``Run Python File''} dans VS Code)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize, label=cm2.py]{python}
+      import math
+
+      print(math.pi)
+    \end{minted}
+  \end{beamercodeblock}
+  
+  \bigskip
+
+  \begin{quote}
+    Qu'est-ce qui pourrait selon vous expliquer que, en exécutant le fichier ``cm2.py'' ci-dessus, on obtienne l'erreur :
+  
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+        Traceback (most recent call last):
+          File "cm2.py", line 3, in <module>
+            print(math.pi)
+        AttributeError: module 'math' has no attribute 'pi'
+      \end{minted}
+    \end{beamercodeblock}
+  \end{quote}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,135 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Accès aux données},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Fichiers]{CM 7 - L'interaction avec des données en ligne}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Requêtes HTTP GET}
+
+\begin{frame}[fragile]{Filtrage des résultats}
+  \begin{columns}
+    \begin{column}{0.48\textwidth}
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          import requests
+
+          url = # ...
+          contenu = requests.get(url, 
+                        params="age=20")
+        \end{minted}
+      \end{beamercodeblock}        
+    \end{column} \hfill
+    \begin{column}{0.48\textwidth}
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          import requests
+
+          def filtre_20ans(donnees):
+            # [...]
+
+          url = # ...
+          contenu = requests.get(url)
+          post_filtre = filtre_20ans(contenu)
+        \end{minted}
+      \end{beamercodeblock}        
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \item Quelle version préférer ? \pause \alert{Celle de gauche}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{En-tête HTTP}
+  Se faire passer pour un navigateur :
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      http_headers = {'User-Agent': "Mozilla/5.0"}
+      contenu_brut = requests.get(url, headers=http_headers)
+      contenu_json = contenu_brut.json()
+    \end{minted}
+  \end{beamercodeblock}
+
+  Utile pour contourner certains filtres basiques des fournisseurs de données.
+\end{frame}
+
+\begin{frame}{Clés d'API}
+  De nombreux fournisseurs de données demande une clé d'API :
+  \begin{itemize}
+    \item Sorte d'identifiant-mot de passe
+    \item Pour suivre les usages
+    \item Pour limiter / facturer certains usages
+  \end{itemize}
+
+  $\Rightarrow$ Dans ce cas, créer la clé en amont puis la spécifier comme paramètre lors de chaque appel
+
+  \pause
+
+  \alert{Cette clé ne doit JAMAIS apparaître en clair dans votre code (lue dans un fichier externe)}
+
+\end{frame}
+
+% https://geoservices.ign.fr/documentation/services/api-et-services-ogc/calcul-altimetrique-rest
+
+\begin{frame}{Exercice collectif}
+  \begin{quote}
+    Prendre connaissance de l'API IGN de calcul d'altitude et l'utiliser (dans le navigateur puis via Python) pour calculer les altitudes des points suivants :
+    \begin{itemize}
+      \item Samoëns : \mintinline{python}| {'lon': 6.73333, 'lat': 46.083328}|
+      \item Rennes : \mintinline{python}| {'lon': -1.68333, 'lat': 48.083328}|
+    \end{itemize}
+  \end{quote}
+
+  {\centering
+    \url{https://geoservices.ign.fr/documentation/services/api-et-services-ogc/calcul-altimetrique-rest}
+  }
+
+\end{frame}
+
+\end{document}

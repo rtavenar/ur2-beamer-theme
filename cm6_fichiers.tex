@@ -1,0 +1,247 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Accès aux données},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Fichiers]{CM 6 - L'interaction avec des fichiers}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture de fichiers}
+\begin{frame}[fragile]{Lecture de fichiers}
+  \begin{enumerate}
+    \item Ouverture du fichier avec \mintinline{python}|fp = open(nom_du_fichier, "r", encoding=...)|
+    \item Chargement du contenu du fichier dans une variable : dépend du type de fichiers
+    \begin{itemize}
+      \item \mintinline{python}|fp.read()| ou \mintinline{python}|fp.readlines()| : retourne une (liste de) chaîne(s) de caractères
+      \item \mintinline{python}|csv.reader(fp, ...)| : retourne une liste de listes (fichier CSV représenté comme une matrice)
+      \item \mintinline{python}|csv.DictReader(fp, ...)| : retourne une liste de dictionnaires
+      \item \mintinline{python}|json.load(fp)| : retourne un dictionnaire / une liste de dictionnaires
+    \end{itemize}
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{Fichiers CSV}
+  Soit le fichier \mintinline{python}|x.csv| suivant :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      A,B,C,Z
+      1,2,3,4
+      5,6,7,8
+    \end{minted}
+  \end{beamercodeblock}
+
+  \medskip
+
+  \begin{columns}
+    \begin{column}{0.48\textwidth}
+
+      \center{\mintinline{python}|csv.reader|}
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          fp = open("x.csv", "r")
+          for r in csv.reader(fp, 
+                     delimiter=","):
+            print(r)
+        \end{minted}
+      \end{beamercodeblock}
+      
+      affichera :
+      \smallskip
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          ["A", "B", "C", "Z"]
+          [1, 2, 3, 4]
+          [5, 6, 7, 8]
+        \end{minted}
+      \end{beamercodeblock}
+    \end{column} \hfill
+    \begin{column}{0.48\textwidth}
+
+      \center{\mintinline{python}|csv.DictReader|}
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          fp = open("x.csv", "r")
+          for r in csv.DictReader(fp, 
+                     delimiter=","):
+            print(r)
+        \end{minted}
+      \end{beamercodeblock}
+
+      affichera :
+      \smallskip
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize, stripnl=false]{python}
+          {"A": 1, "B": 2, "C": 3, "Z": 4}
+          {"A": 5, "B": 6, "C": 7, "Z": 8}
+
+        \end{minted}
+      \end{beamercodeblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Écriture de fichiers}
+\begin{frame}[fragile]{Écriture de fichiers}
+  \begin{enumerate}
+    \item Ouverture du fichier avec \mintinline{python}|fp = open(nom_du_fichier, "w", encoding=...)|
+    \item Écriture des données dans le fichier : dépend du type de fichiers
+    \begin{itemize}
+      \item \mintinline{python}|fp.write()| : écrit une chaîne de caractères
+      \item \mintinline{python}|csv.writer(fp, ...)| : permet d'écrire des listes (fichier CSV représenté comme une matrice)
+      \item \mintinline{python}|csv.DictWriter(fp, ...)| : permet d'écrire des dictionnaires
+      \item \mintinline{python}|json.dump(..., fp)| : écrit un dictionnaire / une liste de dictionnaires
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Fichiers CSV}
+  Supposons que l'on veuille créer le fichier \mintinline{python}|x.csv| suivant :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      A,B,Z
+      1,2,4
+      5,6,8
+    \end{minted}
+  \end{beamercodeblock}
+
+  \begin{columns}
+    \begin{column}{0.45\textwidth}
+
+      \center{\mintinline{python}|csv.writer|}
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          donnees = [
+            ["A", "B", "Z"],
+            [1  , 2  , 4  ],
+            [5  , 6  , 8  ]
+          ]
+          fp = open("x.csv", "w")
+          csvfp = csv.writer(fp, 
+                    delimiter=",")
+          for r in donnees:
+            csvfp.writerow(r)
+        \end{minted}
+      \end{beamercodeblock}
+    \end{column} \hfill
+    \begin{column}{0.52\textwidth}
+
+      \center{\mintinline{python}|csv.DictReader|}
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          donnees = [
+            {"A": 1, "B": 2, "Z": 4},
+            {"A": 5, "B": 6, "Z": 8}
+          ]
+          fp = open("x.csv", "w")
+          csvfp = csv.DictWriter(fp,
+                    fieldnames=["A", "B", "Z"],
+                    delimiter=",")
+          csvfp.writeheader()
+          for r in donnees:
+            csvfp.writerow(r)
+        \end{minted}
+      \end{beamercodeblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice}
+  \begin{quote}
+    Écrivez une fonction qui prend en entrée un nom de fichier CSV et un nom de fichier JSON, lit le contenu du fichier CSV et l'écrit dans le fichier JSON, comme dans l'exemple ci-dessous :
+  \end{quote}
+
+  \begin{columns}[c]
+    \begin{column}{.45\linewidth}
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+          A,B,Z
+          1,2,4
+          5,6,8
+        \end{minted}
+      \end{beamercodeblock}
+
+    \end{column} \hfill
+    \begin{column}{.05\linewidth}
+
+      $\rightarrow$
+
+    \end{column} \hfill
+    \begin{column}{.45\linewidth}
+
+      \begin{beamercodeblock}
+        \begin{minted}[fontsize=\footnotesize]{python}
+        [
+          {
+            "A": 1, 
+            "B": 2, 
+            "Z": 4
+          },
+          {
+            "A": 5, 
+            "B": 6, 
+            "Z": 8
+          }
+        ]
+        \end{minted}
+      \end{beamercodeblock}
+
+    \end{column} \hfill
+  \end{columns}
+
+\end{frame}
+
+\end{document}

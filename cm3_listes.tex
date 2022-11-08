@@ -1,0 +1,213 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Structures de données},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- Listes]{CM 3 - Listes}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+% \section{Les listes}
+
+\begin{frame}[fragile]{Parcours de listes (1/2)}  
+  3 parcours de listes en Python :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      ma_liste = [4, 3, 3]
+
+      for valeur in ma_liste:  # Parcours par valeur
+        print(valeur)
+      
+      for i in range(len(ma_liste)):  # Parcours par indice
+        print(i)
+      
+      for i, valeur in enumerate(ma_liste):  # Parcours par indice ET valeur
+        print(i, valeur)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Parcours de listes (2/2)}  
+  On dispose d'une liste \mintinline{python}|li = [5, 3, 7, 2]|.
+  Quel parcours utiliser pour\dots
+
+  \begin{itemize}
+    \item Déterminer le minimum de la liste \mintinline{python}|li| ? \pause \alert{Par valeur}
+    \item Déterminer la position du minimum de la liste \mintinline{python}|li| ? \pause \alert{Par indice ET valeur}
+    \item Créer une nouvelle liste définie comme \mintinline{python}|[f(5), f(3), f(7), f(2)]| ? \pause \alert{Par valeur}
+    \item Créer une nouvelle liste définie comme \mintinline{python}|[f(5, 3), f(3, 7), f(7, 2)]| ? \pause \alert{Par indice}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{(arg)max/(arg)min d'une liste}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      max_val = PAS_BEAUCOUP_DU_TOUT  # Mais quoi ?
+      for val in ma_liste:
+        if val > max_val:
+          max_val = val
+      # À la fin de la boucle, la valeur maximale est stockée dans `max_val`
+    \end{minted}
+  \end{beamercodeblock}
+
+  \pause
+  
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      max_val = PAS_BEAUCOUP_DU_TOUT  # Mais quoi ?
+      indice_max = None
+      for i, val in enumerate(ma_liste):
+        if val > max_val:
+          max_val = val
+          indice_max = i
+      # À la fin de la boucle, l'argmax est stocké dans `indice_max`
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice}
+  \begin{quote}
+    Écrivez une fonction qui prend en entrée une liste de chaînes de caractères et retourne la position de la chaîne de la liste qui contient le plus grand nombre de `"A"' majuscules.
+  \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Parcours de listes : piège}  
+  On ne doit \alert{jamais} parcourir une liste pendant qu'on lui insère / supprime des éléments.
+
+  Alternatives :
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      nouvelle_liste = []
+      for v in ma_liste:
+        nouvelle_liste.append(v)
+        if une_certaine_condition:
+          nouvelle_liste.append(valeur_a_inserer)
+    \end{minted}
+  \end{beamercodeblock}
+  
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      nouvelle_liste = []
+      for v in ma_liste:
+        if une_certaine_condition:
+          nouvelle_liste.append(v)
+        # Sinon, on "supprime" la valeur `v`
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice}
+  \begin{quote}
+    Écrivez une fonction qui prend en entrée une liste d'entiers et retourne une liste où chaque entier \mintinline{python}|n| a été répété exactement \mintinline{python}|n| fois.
+
+    Par exemple, si on fournit en entrée la liste \mintinline{python}|[2, 0, 3, 1]|, la fonction devra retourner la liste \mintinline{python}|[2, 2, 3, 3, 3, 1]|.
+  \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Recopie de liste}  
+  Que vaut \mintinline{python}|li| à la fin du code suivant ?
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      li = [3, 4, 1]
+      nouvelle_liste = li
+      nouvelle_liste.append(4)
+    \end{minted}
+  \end{beamercodeblock}
+
+  \pause
+
+  Pour éviter les mésaventures :
+  
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      li = [3, 4, 1]
+      nouvelle_liste = list(li)
+      nouvelle_liste.append(4)
+    \end{minted}
+  \end{beamercodeblock}
+
+  \pause
+
+  \mintinline{python}|list(li)| permet de faire une \alert{copie superficielle} de \mintinline{python}|li|.
+
+  \emph{Les copies profondes sont en dehors du scope de ce cours. Référez-vous au module \mintinline{python}|deepcopy| si besoin.}
+\end{frame}
+
+\begin{frame}[fragile]{Structures emboîtées}  
+  Comment représenter une matrice avec une / des liste(s) ?
+
+  $$
+  \left(
+    \begin{matrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6
+    \end{matrix}
+  \right)
+  $$
+
+  \pause
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      ma_matrice = [[1, 2, 3],
+                    [4, 5, 6]]
+    \end{minted}
+  \end{beamercodeblock}
+
+  Et, alors, comment accéder à l'élément d'indice $(i, j)$ ? \pause \mintinline{python}|ma_matrice[i][j]|.
+\end{frame}
+
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrivez une fonction qui prend en entrée un entier $n$ et retourne la matrice identité de dimension $n \times n$ représentée à l'aide de listes.
+  \end{quote}
+\end{frame}
+
+
+\end{document}
