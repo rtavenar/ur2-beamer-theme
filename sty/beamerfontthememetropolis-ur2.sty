@@ -468,22 +468,22 @@
 \if@tempswa\else
   \PackageError{beamerfontthememetropolis}{Patching section title failed}\@ehc
 \fi
-\patchcmd{\beamer@@frametitle}
-  {{%
-      \gdef\insertframetitle{{#2\ifnum\beamer@autobreakcount>0\relax{}\space%
-      \usebeamertemplate*{frametitle continuation}\fi}}%
-    \gdef\beamer@frametitle{#2}%
-    \gdef\beamer@shortframetitle{#1}%
-    }}
-  {{%
-      \gdef\insertframetitle{{\metropolis@frametitleformat{#2}\ifnum%
-      \beamer@autobreakcount>0\relax{}\space%
-      \usebeamertemplate*{frametitle continuation}\fi}}%
-    \gdef\beamer@frametitle{#2}%
-    \gdef\beamer@shortframetitle{#1}%
-    }}
-  {}
-  {\PackageError{beamerfontthememetropolis}{Patching frame title failed}\@ehc}
+% \patchcmd{\beamer@@frametitle}
+%   {{%
+%       \gdef\insertframetitle{{#2\ifnum\beamer@autobreakcount>0\relax{}\space%
+%       \usebeamertemplate*{frametitle continuation}\fi}}%
+%     \gdef\beamer@frametitle{#2}%
+%     \gdef\beamer@shortframetitle{#1}%
+%     }}
+%   {{%
+%       \gdef\insertframetitle{{\metropolis@frametitleformat{#2}\ifnum%
+%       \beamer@autobreakcount>0\relax{}\space%
+%       \usebeamertemplate*{frametitle continuation}\fi}}%
+%     \gdef\beamer@frametitle{#2}%
+%     \gdef\beamer@shortframetitle{#1}%
+%     }}
+%   {}
+%   {\PackageError{beamerfontthememetropolis}{Patching frame title failed}\@ehc}
 \metropolis@font@setdefaults
 \ProcessPgfPackageOptions{/metropolis/font}
 \endinput

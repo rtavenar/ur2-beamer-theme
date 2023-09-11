@@ -1,0 +1,211 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[%
+    progressbar=frametitle,
+    block=fill,
+    numbering=fraction,
+    footer=crumbs,
+    sectionpage=numbered,
+    subsectionpage=none,
+    titleformattitle=smallcaps,
+    titleformatsubtitle=smallcaps,
+    %%% new options for UR2 theme:
+    maincolor=red,
+]{metropolis-ur2}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=.,
+    filecolor=ur2Turquoise,
+    urlcolor=ur2Bleu,
+    pdftitle={M1 MAS - Python - Programmation Orientée Objet},
+    pdfpagemode=FullScreen,
+}
+
+% \usepackage{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{myminted}
+% \usepackage[cache=false]{minted}
+
+\title[M1 MAS -- Python -- POO]{CM 8 - La Programmation Orientée Objet}
+\subtitle{Programmation Python -- Master 1 MAS}
+\author{Romain Tavenard}
+\date{2022}
+\institute{%
+\hypersetup{urlcolor=.}
+\makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
+% \makebox[2.2ex][c]{\faHome}\enspace\url{https://rtavenar.github.io/}%
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Vocabulaire}
+
+\begin{frame}[fragile]{Propriétes \& Méthodes}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      class MaClasseTropClasse:
+        def __init__(self):
+          self.a = 123          # Propriété (== attribut)
+        
+        def f(self, b):         # Méthode
+          return b + self.a - 4
+
+        @property
+        def double_de_a(self):  # Propriété (calculée)
+          return 2 * self.a
+
+      o = MaClasseTropClasse()
+      print(o.a)
+      print(o.f())
+      print(o.double_de_a)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Propriétes / Attributs de classe}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+class MaClasseTropClasse:
+  n_objets_crees = 0
+
+  def __init__(self):
+    self.a = 123          # Propriété (== attribut)
+    MaClasseTropClasse.n_objets_crees += 1
+
+o = MaClasseTropClasse()
+print(MaClasseTropClasse.n_objets_crees)
+
+o2 = MaClasseTropClasse()
+print(MaClasseTropClasse.n_objets_crees)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Méthodes de classe}
+  On peut aussi avoir des méthodes de classe : elles ne peuvent accéder qu'aux attributs de classe.
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+class MaClasseTropClasse:
+  n_objets_crees = 0
+  def __init__(self):
+    self.a = 123          # Propriété (== attribut)
+    MaClasseTropClasse.n_objets_crees += 1
+  @classmethod
+  def print_n_objets(cls):
+    print(cls.n_objets_crees)
+
+o = MaClasseTropClasse()
+o2 = MaClasseTropClasse()
+MaClasseTropClasse.print_n_objets()
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Méthodes de classe, méthodes statiques}
+  On peut aussi avoir des méthodes statiques : elles ne peuvent accéder ni aux attributs d'instance ni aux attributs de classe.
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+class MaClasseTropClasse:
+  n_objets_crees = 0
+  def __init__(self):
+    self.a = 123          # Propriété (== attribut)
+    MaClasseTropClasse.n_objets_crees += 1
+  @staticmethod
+  def compare(objet1, objet2):
+    print(f"Les valeurs respectives de a sont {objet1.a} et {objet2.a}")
+
+o = MaClasseTropClasse()
+o2 = MaClasseTropClasse()
+o2.a = 55
+MaClasseTropClasse.compare(o, o2)
+    \end{minted}
+  \end{beamercodeblock}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice de synthèse}
+  \begin{quote}
+    Implémentez une classe \mintinline{python}|NombreComplexe| telle que l'on puisse exécuter le code suivant :
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+        c0 = NombreComplexe(10, 0)  # 10
+        c1 = NombreComplexe(0, 5)   # 5i
+        c2 = NombreComplexe(3, -2)  # 3 - 2i
+        print(c1.module())          # Affiche 5
+        print(NombreComplexe.distance(c0, c1))     # Affiche 11.18...
+      \end{minted}
+    \end{beamercodeblock}
+  \end{quote}
+\end{frame}
+
+\section{Héritage et conséquences}
+
+\begin{frame}[fragile]{Héritage multiple}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+class ClasseA:
+    def __init__(self):
+        super().__init__()
+        self.a = 0
+class ClasseB:
+    def __init__(self):
+        super().__init__()
+        self.b = 0
+class ClasseC(ClasseA, ClasseB):
+    def __init__(self):
+        super().__init__()
+
+obj_c = ClasseC()
+print(obj_c.a, obj_c.b)
+    \end{minted}
+  \end{beamercodeblock}
+
+  Attention, pour que cela fonctionne correctement, il faut que toutes les méthodes de la hiérarchie fassent bien appel au constructeur de leur(s) classe(s) parente(s).
+\end{frame}
+
+\begin{frame}[fragile]{Classe abstraite}
+  Une classe abstraite :
+
+  \begin{itemize}
+    \item doit hériter de la classe \mintinline{python}|ABC| du module \mintinline{python}|abc| ;
+    \item ne peut pas être instanciée ;
+    \item peut être héritée ;
+  \end{itemize}
+
+  C'est un \alert{concept abstrait}.
+
+  \pause
+
+  De la même façon, il existe :
+
+  \begin{itemize}
+    \item des méthodes abstraites (décorateur \mintinline{python}|@abstractmethod|, défini dans le module \mintinline{python}|abc|) ;
+    \item des propriétés calculées abstraites (décorateur \mintinline{python}|@abstractproperty|, défini dans le module \mintinline{python}|abc|).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exercice de synthèse}
+  \begin{quote}
+    Implémentez une classe abstraite \mintinline{python}|Polygone| et les classes \mintinline{python}|Rectangle| et \mintinline{python}|Carre| ayant :
+    \begin{itemize}
+      \item un attribut \mintinline{python}|cotes| qui est une liste des longueurs des côtés du polygone ;
+      \item une méthode \mintinline{python}|perimetre| ;
+      \item une méthode \mintinline{python}|aire|.
+    \end{itemize}
+  \end{quote}
+\end{frame}
+
+\end{document}
