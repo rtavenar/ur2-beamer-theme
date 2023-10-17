@@ -39,7 +39,7 @@
 \title[M1 MAS -- Python -- numpy]{CM 5 - Les librairies numpy et scipy}
 \subtitle{Programmation Python -- Master 1 MAS}
 \author{Romain Tavenard}
-\date{2022}
+\date{2023}
 \institute{%
 \hypersetup{urlcolor=.}
 \makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
@@ -159,7 +159,7 @@
     \begin{minted}[fontsize=\footnotesize]{python}
       import numpy as np
       v = np.array([1, 2, 3])
-      w = np.array([0, 10, 20])
+      w = np.array([0, 10])
 
       print(v.shape)              # (3, )
       print(v[:, None].shape)     # (3, 1)
@@ -173,23 +173,23 @@
 
   \begin{beamercodeblock}
     \begin{minted}[fontsize=\footnotesize]{python}
-      mat = np.zeros((3, 3))
+      mat = np.zeros((3, 2))
       for i in range(len(v)):
         for j in range(len(w)):
           mat[i, j] = v[i] + w[j]
       
       # Remplacé par :
       mat = v[:, None] + w[None, :]
-      #     ^ (3, 1)     ^ (1, 3)
+      #     ^ (3, 1)     ^ (1, 2)
     \end{minted}
   \end{beamercodeblock}
 
   $$
     \left(
       \begin{matrix}
-        v_0 + w_0 & v_0 + w_1 & v_0 + w_2 \\
-        v_1 + w_0 & v_1 + w_1 & v_1 + w_2 \\
-        v_2 + w_0 & v_2 + w_1 & v_2 + w_2
+        v_0 + w_0 & v_0 + w_1 \\
+        v_1 + w_0 & v_1 + w_1 \\
+        v_2 + w_0 & v_2 + w_1
       \end{matrix}
     \right)
   $$
