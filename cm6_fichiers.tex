@@ -39,7 +39,7 @@
 \title[M1 MAS -- Python -- Fichiers]{CM 6 - L'interaction avec des fichiers}
 \subtitle{Programmation Python -- Master 1 MAS}
 \author{Romain Tavenard}
-\date{2022}
+\date{2025}
 \institute{%
 \hypersetup{urlcolor=.}
 \makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
@@ -177,7 +177,7 @@
     \end{column} \hfill
     \begin{column}{0.52\textwidth}
 
-      \center{\mintinline{python}|csv.DictReader|}
+      \center{\mintinline{python}|csv.DictWriter|}
 
       \begin{beamercodeblock}
         \begin{minted}[fontsize=\footnotesize]{python}
@@ -196,6 +196,17 @@
       \end{beamercodeblock}
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Fermeture des fichiers après écriture}
+  \begin{itemize}
+    \item En pratique, l'écriture n'est pas instantanée
+    \item Bonne pratique : fermer explicitement le fichier
+    \begin{itemize}
+      \item \mintinline{python}|fp.close()|
+      \item s'exécute aussi si la variable \mintinline{python}|fp| est supprimée (à la sortie d'une fonction par exemple)
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Exercice}

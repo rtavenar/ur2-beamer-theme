@@ -39,7 +39,7 @@
 \title[M1 MAS -- Python -- Bases]{CM 1 - Bases}
 \subtitle{Programmation Python -- Master 1 MAS}
 \author{Romain Tavenard}
-\date{2023}
+\date{2025}
 \institute{%
 \hypersetup{urlcolor=.}
 \makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
@@ -164,17 +164,6 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Exercice}
-  \begin{quote}
-    Écrivez une fonction en Python qui affiche tous les termes plus petits que 1000 de la suite $(u_n)$ définie comme :
-
-$$
-\begin{array}{rcc}u_0 & = & 2 \\
-\forall n \geq 1, \, u_n & = & u_{n-1}^2\end{array}
-$$
-  \end{quote}
-\end{frame}
-
 \section{Fonctions}
 
 \begin{frame}[fragile]{Définir une fonction en Python (1/2)}  
@@ -241,6 +230,17 @@ $$
   \end{enumerate}
 \end{frame}
 
+\begin{frame}{Exercice}
+  \begin{quote}
+    Écrivez une fonction en Python qui affiche tous les termes plus petits que 1000 de la suite $(u_n)$ définie comme :
+
+$$
+\begin{array}{rcc}u_0 & = & 2 \\
+\forall n \geq 1, \, u_n & = & u_{n-1}^2\end{array}
+$$
+  \end{quote}
+\end{frame}
+
 \begin{frame}[fragile]{Les paramètres optionnels}  
   Une fonction peut avoir des paramètres optionnels :
     
@@ -257,11 +257,11 @@ $$
   Les paramètres optionnels sont toujours placés \alert{après} les paramètres non optionnels.
 \end{frame}
 
-\begin{frame}{Exercice}
-  \begin{quote}
-    Écrivez une fonction en Python qui prenne en argument une longueur \mintinline{python}|long| et retourne l'aire du triangle équilatéral de côté \mintinline{python}|long|.
-  \end{quote}
-\end{frame}
+% \begin{frame}{Exercice}
+%   \begin{quote}
+%     Écrivez une fonction en Python qui prenne en argument une longueur \mintinline{python}|long| et retourne l'aire du triangle équilatéral de côté \mintinline{python}|long|.
+%   \end{quote}
+% \end{frame}
 
 \section{Chaînes de caractères}
 

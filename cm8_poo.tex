@@ -36,10 +36,10 @@
 \usepackage{myminted}
 % \usepackage[cache=false]{minted}
 
-\title[M1 MAS -- Python -- POO]{CM 8 - La Programmation Orientée Objet}
+\title[M1 MAS -- Python -- POO]{CM 8a - La Programmation Orientée Objet}
 \subtitle{Programmation Python -- Master 1 MAS}
 \author{Romain Tavenard}
-\date{2022}
+\date{2025}
 \institute{%
 \hypersetup{urlcolor=.}
 \makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
@@ -51,6 +51,32 @@
 \maketitle
 
 \section{Vocabulaire}
+
+\begin{frame}[fragile]{Constructeur}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      class MaClasseTropClasse:
+        def __init__(self):
+          self.a = 123
+
+      o = MaClasseTropClasse()
+    \end{minted}
+  \end{beamercodeblock}
+
+  Que vaut \mintinline{python}|o.a| ici ?
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      class MaClasseTropClasse:
+        def __init__(self, x):
+          self.a = 123 + x
+
+      o = MaClasseTropClasse(12)
+    \end{minted}
+  \end{beamercodeblock}
+
+  Que vaut \mintinline{python}|o.a| ici ?
+\end{frame}
 
 \begin{frame}[fragile]{Propriétes \& Méthodes}
   \begin{beamercodeblock}
@@ -68,73 +94,73 @@
 
       o = MaClasseTropClasse()
       print(o.a)
-      print(o.f())
+      print(o.f(0))
       print(o.double_de_a)
     \end{minted}
   \end{beamercodeblock}
 \end{frame}
 
-\begin{frame}[fragile]{Propriétes / Attributs de classe}
-  \begin{beamercodeblock}
-    \begin{minted}[fontsize=\footnotesize]{python}
-class MaClasseTropClasse:
-  n_objets_crees = 0
+% \begin{frame}[fragile]{Propriétes / Attributs de classe}
+%   \begin{beamercodeblock}
+%     \begin{minted}[fontsize=\footnotesize]{python}
+% class MaClasseTropClasse:
+%   n_objets_crees = 0
 
-  def __init__(self):
-    self.a = 123          # Propriété (== attribut)
-    MaClasseTropClasse.n_objets_crees += 1
+%   def __init__(self):
+%     self.a = 123          # Propriété (== attribut)
+%     MaClasseTropClasse.n_objets_crees += 1
 
-o = MaClasseTropClasse()
-print(MaClasseTropClasse.n_objets_crees)
+% o = MaClasseTropClasse()
+% print(MaClasseTropClasse.n_objets_crees)
 
-o2 = MaClasseTropClasse()
-print(MaClasseTropClasse.n_objets_crees)
-    \end{minted}
-  \end{beamercodeblock}
-\end{frame}
+% o2 = MaClasseTropClasse()
+% print(MaClasseTropClasse.n_objets_crees)
+%     \end{minted}
+%   \end{beamercodeblock}
+% \end{frame}
 
-\begin{frame}[fragile]{Méthodes de classe}
-  On peut aussi avoir des méthodes de classe : elles ne peuvent accéder qu'aux attributs de classe.
+% \begin{frame}[fragile]{Méthodes de classe}
+%   On peut aussi avoir des méthodes de classe : elles ne peuvent accéder qu'aux attributs de classe.
 
-  \begin{beamercodeblock}
-    \begin{minted}[fontsize=\footnotesize]{python}
-class MaClasseTropClasse:
-  n_objets_crees = 0
-  def __init__(self):
-    self.a = 123          # Propriété (== attribut)
-    MaClasseTropClasse.n_objets_crees += 1
-  @classmethod
-  def print_n_objets(cls):
-    print(cls.n_objets_crees)
+%   \begin{beamercodeblock}
+%     \begin{minted}[fontsize=\footnotesize]{python}
+% class MaClasseTropClasse:
+%   n_objets_crees = 0
+%   def __init__(self):
+%     self.a = 123          # Propriété (== attribut)
+%     MaClasseTropClasse.n_objets_crees += 1
+%   @classmethod
+%   def print_n_objets(cls):
+%     print(cls.n_objets_crees)
 
-o = MaClasseTropClasse()
-o2 = MaClasseTropClasse()
-MaClasseTropClasse.print_n_objets()
-    \end{minted}
-  \end{beamercodeblock}
-\end{frame}
+% o = MaClasseTropClasse()
+% o2 = MaClasseTropClasse()
+% MaClasseTropClasse.print_n_objets()
+%     \end{minted}
+%   \end{beamercodeblock}
+% \end{frame}
 
-\begin{frame}[fragile]{Méthodes de classe, méthodes statiques}
-  On peut aussi avoir des méthodes statiques : elles ne peuvent accéder ni aux attributs d'instance ni aux attributs de classe.
+% \begin{frame}[fragile]{Méthodes de classe, méthodes statiques}
+%   On peut aussi avoir des méthodes statiques : elles ne peuvent accéder ni aux attributs d'instance ni aux attributs de classe.
 
-  \begin{beamercodeblock}
-    \begin{minted}[fontsize=\footnotesize]{python}
-class MaClasseTropClasse:
-  n_objets_crees = 0
-  def __init__(self):
-    self.a = 123          # Propriété (== attribut)
-    MaClasseTropClasse.n_objets_crees += 1
-  @staticmethod
-  def compare(objet1, objet2):
-    print(f"Les valeurs respectives de a sont {objet1.a} et {objet2.a}")
+%   \begin{beamercodeblock}
+%     \begin{minted}[fontsize=\footnotesize]{python}
+% class MaClasseTropClasse:
+%   n_objets_crees = 0
+%   def __init__(self):
+%     self.a = 123          # Propriété (== attribut)
+%     MaClasseTropClasse.n_objets_crees += 1
+%   @staticmethod
+%   def compare(objet1, objet2):
+%     print(f"Les valeurs respectives de a sont {objet1.a} et {objet2.a}")
 
-o = MaClasseTropClasse()
-o2 = MaClasseTropClasse()
-o2.a = 55
-MaClasseTropClasse.compare(o, o2)
-    \end{minted}
-  \end{beamercodeblock}
-\end{frame}
+% o = MaClasseTropClasse()
+% o2 = MaClasseTropClasse()
+% o2.a = 55
+% MaClasseTropClasse.compare(o, o2)
+%     \end{minted}
+%   \end{beamercodeblock}
+% \end{frame}
 
 \begin{frame}[fragile]{Exercice de synthèse}
   \begin{quote}
@@ -145,67 +171,74 @@ MaClasseTropClasse.compare(o, o2)
         c1 = NombreComplexe(0, 5)   # 5i
         c2 = NombreComplexe(3, -2)  # 3 - 2i
         print(c1.module())          # Affiche 5
-        print(NombreComplexe.distance(c0, c1))     # Affiche 11.18...
+        print(c0.distance(c1))     # Affiche 11.18...
       \end{minted}
     \end{beamercodeblock}
   \end{quote}
 \end{frame}
 
-\section{Héritage et conséquences}
+\section{Surcharge d'opérateur}
 
-\begin{frame}[fragile]{Héritage multiple}
-  \begin{beamercodeblock}
-    \begin{minted}[fontsize=\footnotesize]{python}
-class ClasseA:
-    def __init__(self):
-        super().__init__()
-        self.a = 0
-class ClasseB:
-    def __init__(self):
-        super().__init__()
-        self.b = 0
-class ClasseC(ClasseA, ClasseB):
-    def __init__(self):
-        super().__init__()
-
-obj_c = ClasseC()
-print(obj_c.a, obj_c.b)
-    \end{minted}
-  \end{beamercodeblock}
-
-  Attention, pour que cela fonctionne correctement, il faut que toutes les méthodes de la hiérarchie fassent bien appel au constructeur de leur(s) classe(s) parente(s).
-\end{frame}
-
-\begin{frame}[fragile]{Classe abstraite}
-  Une classe abstraite :
-
-  \begin{itemize}
-    \item doit hériter de la classe \mintinline{python}|ABC| du module \mintinline{python}|abc| ;
-    \item ne peut pas être instanciée ;
-    \item peut être héritée ;
-  \end{itemize}
-
-  C'est un \alert{concept abstrait}.
+\begin{frame}[fragile]{Les opérateurs en Python}
+  Que se passe-t-il lorsqu'on écrit \mintinline{python}|a + b| en Python ?
 
   \pause
 
-  De la même façon, il existe :
+  L'interpréteur\dots
+  \begin{enumerate}
+    \item recherche la classe de \mintinline{python}|a|
+    \item examine cette classe pour trouver une méthode spéciale \mintinline{python}|__add__|
+    \item appelle cette méthode, comme si on avait écrit \mintinline{python}|a.__add__(b)|
+  \end{enumerate}
+\end{frame}
 
-  \begin{itemize}
-    \item des méthodes abstraites (décorateur \mintinline{python}|@abstractmethod|, défini dans le module \mintinline{python}|abc|) ;
-    \item des propriétés calculées abstraites (décorateur \mintinline{python}|@abstractproperty|, défini dans le module \mintinline{python}|abc|).
-  \end{itemize}
+\begin{frame}[fragile]{Surcharge d'opérateur : exemple}
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      class MaClasseTropClasse:
+        def __init__(self, x=0):
+          self.a = 123 + x
+        
+        def __add__(self, autre):
+          return self.a + autre.a
+
+      o1 = MaClasseTropClasse()
+      o2 = MaClasseTropClasse(10)
+    \end{minted}
+  \end{beamercodeblock}
+
+  Que vaut \mintinline{python}|o1 + o2| ici ?
 \end{frame}
 
 \begin{frame}[fragile]{Exercice de synthèse}
   \begin{quote}
-    Implémentez une classe abstraite \mintinline{python}|Polygone| et les classes \mintinline{python}|Rectangle| et \mintinline{python}|Carre| ayant :
-    \begin{itemize}
-      \item un attribut \mintinline{python}|cotes| qui est une liste des longueurs des côtés du polygone ;
-      \item une méthode \mintinline{python}|perimetre| ;
-      \item une méthode \mintinline{python}|aire|.
-    \end{itemize}
+    Reprenez votre classe \mintinline{python}|NombreComplexe| et implémentez l'opérateur d'addition :
+    \begin{beamercodeblock}
+      \begin{minted}[fontsize=\footnotesize]{python}
+        c0 = NombreComplexe(10, 0)  # 10
+        c1 = NombreComplexe(0, 5)   # 5i
+        c2 = c0 + c1                # c2 doit être de classe NombreComplexe
+      \end{minted}
+    \end{beamercodeblock}
   \end{quote}
+\end{frame}
+
+\begin{frame}[fragile]{Les opérateurs en Python}
+  À quoi servent les opérateurs suivants ?
+  
+  \begin{enumerate}
+    % \item \mintinline{python}|__radd__|
+    %   \pause
+    \item \mintinline{python}|__mul__| % / \mintinline{python}|__rmul__| 
+    \pause
+    \item \mintinline{python}|__sub__| %/ \mintinline{python}|__rsub__|
+    \pause
+    \item \mintinline{python}|__truediv__| / \mintinline{python}|__floordiv__|
+    \pause
+    \item \mintinline{python}|__repr__|
+    % \pause
+    % \item \mintinline{python}|__contains__|
+  \end{enumerate}
 \end{frame}
 
 \end{document}

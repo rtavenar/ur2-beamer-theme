@@ -39,7 +39,7 @@
 \title[M1 MAS -- Python -- Fichiers]{CM 7 - L'interaction avec des données en ligne}
 \subtitle{Programmation Python -- Master 1 MAS}
 \author{Romain Tavenard}
-\date{2022}
+\date{2025}
 \institute{%
 \hypersetup{urlcolor=.}
 \makebox[2.2ex][c]{\faEnvelope}\enspace\href{mailto:romain.tavenard@univ-rennes2.fr}{\texttt{romain.tavenard@univ-rennes2.fr}}\\%
@@ -53,35 +53,32 @@
 \section{Requêtes HTTP GET}
 
 \begin{frame}[fragile]{Filtrage des résultats}
-  \begin{columns}
-    \begin{column}{0.48\textwidth}
-      \begin{beamercodeblock}
-        \begin{minted}[fontsize=\footnotesize]{python}
-          import requests
 
-          url = # ...
-          contenu = requests.get(url, 
-                        params="age=20")
-        \end{minted}
-      \end{beamercodeblock}        
-    \end{column} \hfill
-    \begin{column}{0.48\textwidth}
-      \begin{beamercodeblock}
-        \begin{minted}[fontsize=\footnotesize]{python}
-          import requests
 
-          def filtre_20ans(donnees):
-            # [...]
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import requests
 
-          url = # ...
-          contenu = requests.get(url)
-          post_filtre = filtre_20ans(contenu)
-        \end{minted}
-      \end{beamercodeblock}        
-    \end{column}
-  \end{columns}
+      url = # ...
+      contenu = requests.get(url, params="age=20")
+    \end{minted}
+  \end{beamercodeblock}
+
+  \begin{beamercodeblock}
+    \begin{minted}[fontsize=\footnotesize]{python}
+      import requests
+
+      def filtre_20ans(donnees):
+        return [d for d in donnees if d["age"] == 20]
+
+      url = # ...
+      contenu = requests.get(url)
+      post_filtre = filtre_20ans(contenu)
+    \end{minted}
+  \end{beamercodeblock} 
+
   \begin{itemize}
-    \item Quelle version préférer ? \pause \alert{Celle de gauche}
+    \item Quelle version préférer ? \pause \alert{La première}
   \end{itemize}
 
 \end{frame}
@@ -100,7 +97,7 @@
 \end{frame}
 
 \begin{frame}{Clés d'API}
-  De nombreux fournisseurs de données demande une clé d'API :
+  De nombreux fournisseurs de données demandent une clé d'API :
   \begin{itemize}
     \item Sorte d'identifiant-mot de passe
     \item Pour suivre les usages
@@ -127,7 +124,7 @@
   \end{quote}
 
   {\centering
-    \url{https://geoservices.ign.fr/documentation/services/api-et-services-ogc/calcul-altimetrique-rest}
+    \url{https://geoservices.ign.fr/documentation/services/services-geoplateforme/altimetrie\#72673}
   }
 
 \end{frame}
